@@ -1,0 +1,159 @@
+.icon-plues,
+.icon-dash {
+    border-radius: 50%;
+}
+
+body {
+    box-sizing: border-box;
+    background-color: #296ca8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding-bottom: 100px;
+}
+
+.filter-remark {
+    position: sticky;
+    top: 10px;
+    margin-top: 20px;
+    margin: auto;
+    width: 80vw;
+    max-width: 80%;
+}
+
+.filter {
+    width: 100%;
+    padding: 12px;
+    border-radius: 15px;
+    border-style: hidden;
+    border-color: #296ca8;
+}
+
+.filter:focus {
+    outline: none;
+}
+
+.total-cash {
+    position: sticky;
+    top: 60px;
+    max-width: 80%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    z-index: 1;
+    padding: 5px;
+    margin: 35px auto;
+    border-radius: 15px;
+    background-color: rgb(98, 238, 208);
+}
+
+.total-cash .item {
+    /* display: inline-block; */
+    /* padding: 1px; */
+    text-align: center;
+    color: rgb(5, 5, 95);
+    /* border-right: 5px soild rgb(114, 96, 96); */
+}
+
+.total-cash .out {
+    text-align: left;
+    border-left: 2px solid rgba(200, 200, 200, 0.1);
+    color: rgb(131, 101, 4);
+}
+
+.total-cash .in {
+    z-index: 100;
+    text-align: left;
+    border-right: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+p {
+    margin: 0;
+    padding: 10px;
+}
+
+.detail {
+    margin: auto;
+    max-width: 80%;
+    padding: 30px;
+    background-color: rgb(165, 141, 189, 0.3);
+}
+
+.icon-con {
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon-con button {
+    margin: 0 20px;
+}
+
+.btn.active.focus,
+.btn.focus,
+.btn:active.focus,
+.btn:active:focus,
+.btn:focus {
+    outline: none;
+}
+
+.icon-fix {
+    padding: 0;
+    margin: auto;
+    border-radius: 20px;
+    max-width: 80%;
+    background-color: rgba(236, 63, 170);
+    bottom: 5px;
+    position: sticky;
+}
+
+.modal-plues-con {
+    background-color: rgba(0, 0, 0, 0.6);
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.modal-plues-con.show-modal {
+    display: block;
+}
+
+.modal-plues {
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    position: absolute;
+    overflow: hidden;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 100%;
+    width: 400px;
+    animation-name: modalopen;
+    animation-duration: 1s;
+}
+
+.pluse-con {
+    padding: 10px;
+    display: grid;
+    grid-template-columns: repeat(2, 3fr);
+}
+
+.show-type-pluse {
+    padding: 10px;
+    background-color: rosybrown;
+}
+
+@keyframes modalopen {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
