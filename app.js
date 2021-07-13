@@ -42,6 +42,14 @@ db.connect((error) => {
     }
 })
 
+//Define routes
+app.use('/', require('./routes/pages'));
+//app.use('/auth', require('./routes/auth'));
+// 404 page
+app.use((req, res) => {
+    res.status(404).render('404');
+});
+
 app.listen(5000, () => {
     console.log('Server started on port 5000');
 });
