@@ -1,10 +1,15 @@
 const express = require('express');
 const router = express.Router();
+const authController = require('../controllers/auth');
 
-router.get('/', (req, res) => {
-    res.render('first');
 
+
+router.get('/', authController.isLoggedIn, (req, res) => {
+    res.render('first', {
+        user: req.user
+    });
 });
+
 
 router.get('/register', (req, res) => {
     res.render('register');
