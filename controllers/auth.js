@@ -20,6 +20,19 @@ db.connect((error) => {
     }
 })
 
+function formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2)
+        month = '0' + month;
+    if (day.length < 2)
+        day = '0' + day;
+
+    return [year, month, day].join('-');
+}
 
 
 exports.isLoggedIn = async(req, res, next) => {
@@ -41,7 +54,27 @@ exports.isLoggedIn = async(req, res, next) => {
                 }
 
                 // create user variable
-                req.user = result[0]
+                req.user = result[0];
+
+                //create name
+                if (result[0].M_name == "") {
+                    req.user.name = result[0].F_name + " " + result[0].L_name;
+                } else {
+                    req.user.name = result[0].F_name + " " + result[0].M_name + " " + result[0].L_name;
+                }
+
+                //create name with initials
+                if (result[0].M_name == "") {
+                    req.user.nameWI = result[0].F_name[0] + ". " + result[0].L_name;
+                } else {
+                    req.user.nameWI = result[0].F_name[0] + "." + result[0].M_name[0] + ". " + result[0].L_name;
+                }
+
+                //create DOB
+
+                req.user.dateOfBirth = formatDate(result[0].DOB);
+
+
                 return next();
             })
 
