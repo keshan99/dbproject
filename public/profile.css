@@ -1,3 +1,8 @@
+:root {
+    --success-color: #2ecc71;
+    --error-color: #e74c3c;
+}
+
 .u-section-1 {
     background-image: none;
 }
@@ -144,8 +149,8 @@
 }
 
 .u-section-1 .u-image-1 {
-    width: 616px;
-    height: 410px;
+    width: 450px;
+    height: 400px;
     margin: -765px 45px 0 auto;
 }
 
@@ -199,6 +204,243 @@
     border-style: none;
     margin: -666px 55px 60px auto;
     padding: 9px 18px 10px 17px;
+}
+
+.alert {
+    margin: 0;
+    position: absolute;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 500px;
+    min-width: 400px;
+    padding: 10px 10px 10px 10px;
+    background-color: #faa9a0;
+    color: #1a0e0a;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    padding: auto;
+    margin: 0;
+}
+
+nav ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav li {
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+}
+
+.modal-plues-con {
+    background-color: rgba(0, 0, 0, 0.6);
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.modal-plues-con.show-modal {
+    display: block;
+}
+
+.modal-plues {
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    position: absolute;
+    overflow: hidden;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 100%;
+    width: 600px;
+    animation-name: modalopen;
+    animation-duration: 1s;
+}
+
+.modal-plues-con2 {
+    background-color: rgba(0, 0, 0, 0.6);
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.modal-plues-con2.show-modal {
+    display: block;
+}
+
+.modal-plues2 {
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    position: absolute;
+    overflow: hidden;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 100%;
+    width: 800px;
+    animation-name: modalopen;
+    animation-duration: 1s;
+}
+
+.pop {
+    width: 120px;
+    left: 50%;
+    left: 10px;
+}
+
+.popM {
+    width: 90%;
+    padding-left: 0;
+    display: flex;
+    justify-content: space-between;
+    left: 50%;
+}
+
+.batch {
+    left: 10px;
+}
+
+.popli {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+h2 {
+    text-align: center;
+    margin: 0 0 20px;
+}
+
+.form {
+    padding: 30px 40px;
+}
+
+.form-control {
+    position: relative;
+}
+
+.form-control label {
+    color: #777;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-control input {
+    border: 2px solid #f0f0f0;
+    border-radius: 4px;
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+}
+
+.form-control input:focus {
+    outline: 0;
+    border-color: #777;
+}
+
+.form-control.success input {
+    border-color: var(--success-color);
+}
+
+.form-control.error input {
+    border-color: var(--error-color);
+}
+
+.form-control small {
+    color: var(--error-color);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    visibility: hidden;
+}
+
+.form-control.error small {
+    visibility: visible;
+}
+
+.form button {
+    cursor: pointer;
+    background-color: #3498db;
+    border: 2px solid #3498db;
+    border-radius: 4px;
+    color: #fff;
+    display: block;
+    font-size: 16px;
+    padding: 10px;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.gender {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+}
+
+.gender input {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+}
+
+.gender label {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+}
+
+#fi {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+#se {
+    display: inline-block;
+}
+
+select {
+    border: 2px solid #f0f0f0;
+    border-radius: 4px;
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+}
+
+.avater-ctn {
+    text-align: center;
+    background-color: orange;
+}
+
+.avater {
+    width: 65%;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.container {
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    width: 500px;
 }
 
 @media (max-width: 1199px) {
@@ -527,5 +769,14 @@
         margin-top: -1341px;
         margin-right: -20px;
         margin-bottom: 1296px;
+    }
+}
+
+@keyframes modalopen {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
     }
 }

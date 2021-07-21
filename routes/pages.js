@@ -33,4 +33,16 @@ router.get('/profile', authController.isLoggedIn, (req, res) => {
 
 });
 
+router.get('/updatepic', authController.isLoggedIn, (req, res) => {
+
+    if (req.user) {
+        res.render('updatepic', {
+            user: req.user
+        });
+    } else {
+        res.redirect('/login');
+    }
+
+});
+
 module.exports = router;

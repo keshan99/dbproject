@@ -2,6 +2,7 @@ const mysql = require("mysql");
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const { promisify } = require('util');
+const fs = require('fs');
 
 const db = mysql.createConnection({
     host: process.env.DATABASE_HOST,
@@ -182,13 +183,7 @@ exports.login = async(req, res) => {
                 res.cookie('jwt', token, cookieOptions);
                 res.status(200).redirect("/");
 
-
-
             }
-
-
-
-
         })
 
 
@@ -206,4 +201,26 @@ exports.logout = async(req, res) => {
     })
 
     res.status(200).redirect('/')
+}
+
+
+exports.data = async(req, res) => {
+
+
+
+
+
+    var data = req.body.pic;
+    var imageBuffer = new Buffer(data, 'base64'); //console = <Buffer 75 ab 5a 8a ...
+    fs.writeFile("test.png", imageBuffer, function(err) {});
+
+    var base64Data = req.body.pic.replace(/^data:image\/png;base64,/, "");
+
+    require("fs").writeFile("out.png", base64Data, 'base64', function(err) {
+        console.log("error");
+    });
+
+
+    res.status(200).redirect("/fdf");
+
 }
