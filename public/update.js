@@ -11,7 +11,7 @@ const department = document.getElementById('department');
 // Show input error message
 function showError(input, message) {
     const formControl = input.parentElement;
-    formControl.className = 'form-control error';
+    formControl.className = 'form-control1 error';
     const small = formControl.querySelector('small');
     small.innerText = message;
 }
@@ -19,7 +19,7 @@ function showError(input, message) {
 // Show success outline
 function showSuccess(input) {
     const formControl = input.parentElement;
-    formControl.className = 'form-control success';
+    formControl.className = 'form-control1 success';
 }
 
 // Check email is valid

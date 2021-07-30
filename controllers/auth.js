@@ -43,7 +43,6 @@ exports.isLoggedIn = async(req, res, next) => {
             const decoed = await promisify(jwt.verify)(req.cookies.jwt,
                 process.env.JWT_SECRET)
 
-            console.log("hello")
             console.log(decoed);
 
             // TODO: cheak if still exists
@@ -204,23 +203,56 @@ exports.logout = async(req, res) => {
 }
 
 
+// update profile pic
 exports.data = async(req, res) => {
-
-
-
 
 
     var data = req.body.pic;
     var imageBuffer = new Buffer(data, 'base64'); //console = <Buffer 75 ab 5a 8a ...
-    fs.writeFile("test.png", imageBuffer, function(err) {});
+    //fs.writeFile("test.png", imageBuffer, function(err) {});
 
     var base64Data = req.body.pic.replace(/^data:image\/png;base64,/, "");
 
-    require("fs").writeFile("out.png", base64Data, 'base64', function(err) {
-        console.log("error");
-    });
 
 
-    res.status(200).redirect("/fdf");
+
+    if (req.cookies.jwt) {
+        try {
+            // TODO: verify the token
+            const decoed = await promisify(jwt.verify)(req.cookies.jwt,
+                process.env.JWT_SECRET)
+
+
+
+            // TODO: cheak if still exists
+            db.query('SELECT * FROM user WHERE ID = ?', [decoed.id], (error, result) => {
+                console.log(result);
+
+                if (!result) {
+                    res.status(200).redirect("/fdf");
+                }
+
+                // create user variable
+                //req.user = result[0];
+
+                let path = "public/images/" + result[0].ID + ".png";
+                require("fs").writeFile(path, base64Data, 'base64', function(err) {
+                    console.log("profile pic update");
+                });
+
+
+                res.status(200).redirect("/profile");
+
+
+            })
+
+        } catch {
+            res.status(200).redirect("/fdf");
+        }
+    }
+
+
+
+
 
 }

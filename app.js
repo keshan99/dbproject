@@ -10,6 +10,8 @@ dotenv.config({ path: __dirname + '/.env' });
 
 const app = express();
 
+
+
 const db = mysql.createConnection({
     host: process.env.DATABASE_HOST,
     user: process.env.DATABASE_USER,
@@ -31,8 +33,9 @@ app.use(cookieParser());
 app.use(fileUpload());
 
 
-
-app.set('view engine', 'hbs');
+//register ejs engine
+//app.set('view engine', 'hbs');
+app.set('view engine', 'ejs');
 
 
 db.connect((error) => {
@@ -50,6 +53,9 @@ app.use('/auth', require('./routes/auth'));
 app.use((req, res) => {
     res.status(404).render('404');
 });
+
+
+
 
 app.listen(5000, () => {
     console.log('Server started on port 5000');

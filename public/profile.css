@@ -328,50 +328,50 @@ h2 {
 }
 
 .form {
-    padding: 30px 40px;
+    padding: 30px 40px !important;
 }
 
-.form-control {
-    position: relative;
+.form-control1 {
+    position: relative !important;
 }
 
-.form-control label {
-    color: #777;
-    display: block;
-    margin-bottom: 5px;
+.form-control1 label {
+    color: #777 !important;
+    display: block !important;
+    margin-bottom: 5px !important;
 }
 
-.form-control input {
-    border: 2px solid #f0f0f0;
-    border-radius: 4px;
-    display: block;
-    width: 100%;
-    padding: 10px;
-    font-size: 14px;
+.form-control1 input {
+    border: 2px solid #f0f0f0 !important;
+    border-radius: 4px !important;
+    display: block !important;
+    width: 100% !important;
+    padding: 10px !important;
+    font-size: 14px !important;
 }
 
-.form-control input:focus {
-    outline: 0;
-    border-color: #777;
+.form-control1 input:focus {
+    outline: 0 !important;
+    border-color: #777 !important;
 }
 
-.form-control.success input {
-    border-color: var(--success-color);
+.form-control1.success input {
+    border-color: var(--success-color) !important;
 }
 
-.form-control.error input {
-    border-color: var(--error-color);
+.form-control1.error input {
+    border-color: var(--error-color) !important;
 }
 
-.form-control small {
-    color: var(--error-color);
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    visibility: hidden;
+.form-control1 small {
+    color: var(--error-color) !important;
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    visibility: hidden !important;
 }
 
-.form-control.error small {
+.form-control1.error small {
     visibility: visible;
 }
 

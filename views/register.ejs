@@ -1,0 +1,139 @@
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="/stylereg.css" />
+    <title>Form Validator</title>
+  </head>
+  <body>
+    <nav>
+        <h1>uni buddy</h1>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/login">Login</a></li>
+            <li><a href="/register">Register</a></li>
+        </ul>
+    </nav>
+
+        <% if (typeof message !== 'undefined') { %>
+        <h4 class="alert alert-danger mt-4 "><%= message %> </h4>
+        <% } %>
+
+        <%/*
+        {{#if message}}
+        <h4 class="alert">{{message}}</h4>
+        {{/if}}
+        */%>
+
+    <div class="all">
+
+          <div class="container">
+      <form id="form" class="form" method='POST'">
+
+
+
+        <h2>Register With Us</h2>
+        <div class="form-control">
+          <label for="username">first name</label>
+          <input type="text" name="Fname" id="Fname" placeholder="Enter first name" />
+          <small>Error message</small>
+        </div>
+        <div class="form-control">
+          <label for="username">middle name (OPTION)</label>
+          <input type="text" id="Mname" name="Mname" placeholder="Enter middle name" />
+          <small>Error message</small>
+        </div>
+        <div class="form-control">
+          <label for="username">last name</label>
+          <input type="text" id="Lname" name="Lname" placeholder="Enter last name" />
+          <small>Error message</small>
+        </div>
+        <div class="form-control">
+          <label for="email">Email</label>
+          <input type="text" id="email" name="email" placeholder="Enter email" />
+          <small>Error message</small>
+        </div>
+        <div class="form-control">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="Enter password" />
+          <small>Error message</small>
+        </div>
+        <div class="form-control">
+          <label for="password2">Confirm Password</label>
+          <input
+      
+            type="password"
+            id="password2"
+            placeholder="Enter password again"
+          />
+          <small>Error message</small>
+        </div>
+
+        <div class="form-control">
+          <label for="DOB">DOB</label>
+          <input type="date" id="DOB" name="DOB" placeholder="Enter DOB" />
+          <small>Error message</small>
+        </div>
+
+        <div class="form-control">
+          <label for="gender">gender</label>
+
+          <div id="gender" class="gender">
+            <div id="fi">
+              <label for="male">Male</label>
+            <input type="radio" id="male" name="gender" checked="checked" value="M">
+            </div>
+            
+            <div id="se">
+              <label for="female">Female</label>
+              <input type="radio" id="female" name="gender" value="F">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-control">
+          <label for="batch">Choose a batch:</label>
+          <select id="batch" name="batch">
+            <option class="bat" value="E17">E17</option>
+            <option class="bat" value="E18">E18</option>
+            <option class="bat" value="E19">E19</option>
+            <option class="bat" value="E20">E20</option>
+          </select>
+        </div>
+
+        <div class="form-control">
+          <label for="department">Choose a department:</label>
+          <select id="department" name="department">
+            <option class="bat" value="common">common(bellow 1.5 years)</option>
+            <option class="bat" value="com">com</option>
+            <option class="bat" value="elec">elec</option>
+            <option class="bat" value="civil">civil</option>
+            <option class="bat" value="mech">mech</option>
+          </select>
+        </div>
+
+        <div class="form-control">
+          <label for="city">city</label>
+          <input type="text" id="city" name="city" placeholder="Enter city" />
+          <small>Error message</small>
+        </div>
+
+
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+    </div>
+
+    
+
+
+    <script src="/scriptreg.js"></script>
+  </body>
+</html>
