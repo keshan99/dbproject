@@ -251,8 +251,48 @@ exports.data = async(req, res) => {
         }
     }
 
+}
 
 
+
+// update profile data
+exports.updateProfile = async(req, res) => {
+    try {
+        // TODO: verify the token
+        const decoed = await promisify(jwt.verify)(req.cookies.jwt,
+            process.env.JWT_SECRET)
+
+        //console.log(decoed);
+        console.log("update")
+
+
+        // TODO: cheak if still exists
+        db.query('SELECT * FROM user WHERE ID = ?', [decoed.id], (error, result) => {
+            //console.log(result);
+
+
+            if (!result) {
+                res.status(200).redirect("/fdfdf");
+            }
+
+            // create user variable
+            let userid = result[0].ID;
+
+
+            const { Fname, Mname, Lname, email, DOB, gender, batch, department, city } = req.body;
+            console.log([Fname, Mname, Lname, email, DOB, gender, batch, department, city, userid]);
+
+            db.query('UPDATE user SET F_name = ?, M_name = ?, L_name = ?, Email = ?, DOB = ?, gender = ?, batch = ?, department = ?, city = ? WHERE ID=?', [Fname, Mname, Lname, email, DOB, gender, batch, department, city, userid], (errror, result) => {
+
+                if (error) {
+                    console.log(error);
+                }
+                res.status(200).redirect("/profile");
+            });
+        });
+    } catch (error) {
+        console.log(error);
+    }
 
 
 }

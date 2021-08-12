@@ -134,20 +134,10 @@ form.addEventListener('submit', function(e) {
 
         let UGender = getGender();
         let UBatch = getBatch();
-        let UFname = Fname.value;
-        let UMname = Mname.value;
-        let ULname = Lname.value;
-
-        let UEmail = email.value;
-        let UDOB = new Date(DOB.value);
-        let Ucity = city.value;
-        let UDepartment = department.value;
-
-
-
         form.action = '/auth/updateProfile';
         form.submit();
     } else {
+        console.log("error error")
         checkRequired([Fname]);
         checkRequired([Lname]);
         checkRequired([email]);
