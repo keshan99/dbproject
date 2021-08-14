@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const authController = require('../controllers/auth');
+const detail = require('../controllers/details');
+
+
 
 
 
@@ -38,6 +41,22 @@ router.get('/updatepic', authController.isLoggedIn, (req, res) => {
     if (req.user) {
         res.render('updatepic', {
             user: req.user
+        });
+    } else {
+        res.redirect('/login');
+    }
+
+});
+
+
+router.get('/money', detail.money, (req, res) => {
+
+    if (req.user) {
+        res.render('money', {
+            moneydetailIn: req.moneydetailIn,
+            moneydetailOut: req.moneydetailOut,
+            user: req.user
+
         });
     } else {
         res.redirect('/login');

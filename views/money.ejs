@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/money3.css">
+
+    <link rel="stylesheet" href="/money2.css" media="screen">
+    <link rel="stylesheet" href="/money1.css" media="screen">
+    <script class="u-script" type="text/javascript" src="/jquery.js" defer=""></script>
+    <script class="u-script" type="text/javascript" src="/nicepage.js" defer=""></script>
+    
+    <meta name="generator" content="Nicepage 3.20.4, nicepage.com">
+    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i">
+
+
+    <title>Document</title>
+</head>
+
+<body>
+    <header class="u-clearfix u-header u-header" id="sec-0b9d">
+        <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
+            <a href="https://nicepage.com" class="u-image u-logo u-image-1">
+                <img src="images/default-logo.png" class="u-logo-image u-logo-image-1">
+            </a>
+            <nav class="u-menu u-menu-dropdown u-offcanvas u-menu-1">
+                <div class="menu-collapse" style="font-size: 1rem; letter-spacing: 0px;">
+                    <a class="u-button-style u-custom-left-right-menu-spacing u-custom-padding-bottom u-custom-top-bottom-menu-spacing u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="#">
+                        <svg><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#menu-hamburger"></use></svg>
+                        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><symbol id="menu-hamburger" viewBox="0 0 16 16" style="width: 16px; height: 16px;"><rect y="1" width="16" height="2"></rect><rect y="7" width="16" height="2"></rect><rect y="13" width="16" height="2"></rect>
+</symbol>
+</defs></svg>
+                    </a>
+                </div>
+                <div class="u-nav-container">
+                    <ul class="u-nav u-unstyled u-nav-1">
+                        <li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="/" style="padding: 10px 20px;">Home</a>
+                        </li>
+                        <li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="/profile" style="padding: 10px 20px;">profile</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="u-nav-container-collapse">
+                    <div class="u-black u-container-style u-inner-container-layout u-opacity u-opacity-95 u-sidenav">
+                        <div class="u-sidenav-overflow">
+                            <div class="u-menu-close"></div>
+                            <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2">
+                                <li class="u-nav-item"><a class="u-button-style u-nav-link" href="/">Home</a>
+                                </li>
+                                <li class="u-nav-item"><a class="u-button-style u-nav-link" href="/profile">profile</a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="u-black u-menu-overlay u-opacity u-opacity-70"></div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <div class="money">
+        <div>
+            <div class="filter-remark">
+                <input type="text" id="filter" class="filter" placeholder="Search by remark" />
+            </div>
+
+            <div class="total-cash">
+                <div class="item in">
+                    <p>Total cash In <span id="cash-in">0</span></p>
+                </div>
+                <div class="item out">
+                    <p>Total cash Out <span id="cash-out">0</span></p>
+                </div>
+            </div>
+
+            <div class="detail">
+                <section class="u-clearfix u-section-1" id="sec-402a">
+                    <div class="u-clearfix u-sheet u-sheet-1">
+                        <div class="u-clearfix u-gutter-20 u-layout-wrap u-layout-wrap-1">
+                            <div class="u-layout">
+                                <div class="u-layout-row">
+                                    <div class="u-container-style u-layout-cell u-shape-rectangle u-size-30 u-layout-cell-1">
+                                        <div class="u-container-layout u-container-layout-1">
+
+
+
+
+                                            <% for(var i = 0; i < moneydetailIn.length; i++) { %>
+                                                    <div class="u-container-style u-expanded-width u-group u-palette-1-light-2 u-radius-7 u-shape-round u-group-3">
+                                                <div class="u-container-layout u-valign-top-sm u-valign-top-xs u-container-layout-4">
+                                                    <div class="u-container-style u-expanded-height u-group u-palette-4-base u-radius-10 u-shape-round u-group-4">
+                                                        <div class="u-container-layout u-container-layout-5">
+                                                            <p class="u-small-text u-text u-text-default u-text-variant u-text-6"><%=moneydetailIn[i].date%></p>
+                                                            <p class="u-align-center u-text u-text-default u-text-7"><%=moneydetailIn[i].value%> $</p>
+                                                            <p class="u-align-left u-small-text u-text u-text-default u-text-variant u-text-8"><%=moneydetailIn[i].time%></p>
+                                                        </div>
+                                                    </div>
+                                                    <img class="u-expanded-height u-image u-image-round u-radius-10 u-image-2" src="images/2.svg" alt="" data-image-width="400" data-image-height="265">
+                                                    <p class="u-large-text u-text u-text-default u-text-palette-1-light-3 u-text-variant u-text-9" data-animation-name="fadeIn" data-animation-duration="1000" data-animation-delay="0" data-animation-direction=""><%=moneydetailIn[i].name%></p>
+                                                    <p class="u-text u-text-10"><%=moneydetailIn[i].note%><br>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <% } %>
+ <!--
+                                            <%if (typeof moneydetail !== 'undefined') { %> 
+                                                
+                                            <div class="u-container-style u-expanded-width u-group u-palette-1-light-2 u-radius-7 u-shape-round u-group-3">
+                                                <div class="u-container-layout u-valign-top-sm u-valign-top-xs u-container-layout-4">
+                                                    <div class="u-container-style u-expanded-height u-group u-palette-4-base u-radius-10 u-shape-round u-group-4">
+                                                        <div class="u-container-layout u-container-layout-5">
+                                                            <p class="u-small-text u-text u-text-default u-text-variant u-text-6"><%=moneydetail.date%></p>
+                                                            <p class="u-align-center u-text u-text-default u-text-7"><%=moneydetail.value%> $</p>
+                                                            <p class="u-align-left u-small-text u-text u-text-default u-text-variant u-text-8"><%=moneydetail.time%></p>
+                                                        </div>
+                                                    </div>
+                                                    <img class="u-expanded-height u-image u-image-round u-radius-10 u-image-2" src="images/2.svg" alt="" data-image-width="400" data-image-height="265">
+                                                    <p class="u-large-text u-text u-text-default u-text-palette-1-light-3 u-text-variant u-text-9" data-animation-name="fadeIn" data-animation-duration="1000" data-animation-delay="0" data-animation-direction=""><%=moneydetail.name%></p>
+                                                    <p class="u-text u-text-10"><%=moneydetail.note%><br>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            
+                                            <% } %>
+
+-->                                         
+
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="u-container-style u-layout-cell u-size-30 u-layout-cell-2">
+                                        <div class="u-container-layout u-container-layout-8">
+
+                                            <!-- -->
+
+
+
+                                            <!-- -->
+
+                                            <% for(var i = 0; i < moneydetailOut.length; i++) { %>
+                                            <div class="u-container-style u-expanded-width u-group u-palette-1-light-2 u-radius-7 u-shape-round u-group-9">
+                                                <div class="u-container-layout u-valign-top-lg u-valign-top-md u-valign-top-sm u-valign-top-xs u-container-layout-11">
+                                                    <div class="u-container-style u-expanded-height u-group u-palette-2-light-1 u-radius-10 u-shape-round u-group-10">
+                                                        <div class="u-container-layout u-container-layout-12">
+                                                            <p class="u-small-text u-text u-text-default u-text-variant u-text-21"><%=moneydetailOut[i].date%></p>
+                                                            <p class="u-align-center u-text u-text-default u-text-22"><%=moneydetailOut[i].value%> $</p>
+                                                            <p class="u-align-left u-small-text u-text u-text-default u-text-variant u-text-23"><%=moneydetailOut[i].time%></p>
+                                                        </div>
+                                                    </div>
+                                                    <img class="u-expanded-height u-image u-image-round u-radius-10 u-image-5" src="images/2.svg" alt="" data-image-width="400" data-image-height="265">
+                                                    <p class="u-large-text u-text u-text-default u-text-variant u-text-white u-text-24" data-animation-name="fadeIn" data-animation-duration="1000" data-animation-delay="0" data-animation-direction=""><%=moneydetailOut[i].name%></p>
+                                                    <p class="u-text u-text-25"><%=moneydetailOut[i].note%><br>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <% } %>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div class="icon-fix">
+                <div class="icon-con">
+
+                    <button class="icon-plues btn btn-outline-success btn-lg" id="open-plues">
+                            <i class="bi bi-plus-circle-fill" style="font-size: 4rem; "></i>
+                            in
+                            
+                    </button>
+
+                    <button class="icon-dash btn btn-outline-warning btn-lg" id="open-mines">
+                        <i class="bi bi-dash-circle-fill" style="font-size: 4rem; "></i>
+                        out
+                </button>
+
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        <div class="modal-plues-con" id="modal-plues-con">
+            <div class="modal-plues" id="modal-plues">
+
+                <div class="pluse-con">
+
+                    <div class="catagory" id="catagory1">
+
+                        <div class="btn-group-vertical btn-group-toggle" data-toggle="buttons">
+
+
+
+                            <label class="btn btn-warning active cata_select" id="fiverr">
+                              <input type="radio" name="options" id="option2" autocomplete="off"> fiverr
+                            </label>
+
+                            <label class="btn btn-warning cata_select" id="home">
+                              <input type="radio" name="options" id="option3" autocomplete="off"> home
+                            </label>
+
+                            <label class="btn btn-warning cata_select" id="part time job">
+                              <input type="radio" name="options" id="option4" autocomplete="off"> part time job
+                            </label>
+
+
+
+                        </div>
+
+                    </div>
+
+                    <div class="money-remark">
+                        <form id="pluse-money-form">
+                            <div class="show-type-pluse">
+                                <span id="show-type-pluse">fiver</span>
+                            </div>
+
+                            <label for="money">Money:</label><br>
+                            <input type="money" id="money2" name="money" placeholder="enter cost"><br>
+
+                            <label for="note">Note:</label><br>
+                            <input type="text" id="note2" name="note" placeholder="enter note"><br><br>
+                            <input type="submit" value="Submit">
+
+                        </form>
+
+                    </div>
+                </div>
+
+
+
+
+            </div>
+        </div>
+
+        <div class="modal-mines-con" id="modal-mines-con">
+            <div class="modal-mines" id="modal-mines">
+
+                <div class="mines-con">
+
+                    <div class="catagory" id="catagory2">
+
+                        <div class="btn-group-vertical btn-group-toggle" data-toggle="buttons">
+
+                            <div class="btn-group">
+                                <label class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  <input type="radio" name="options" id="option1" autocomplete="off"> Food
+                                </label>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <div class="cata_select" id="breakfirst">breakfirst</div>
+                                    </li>
+                                    <li>
+                                        <div class="cata_select" id="lunch">Lunch</div>
+                                    </li>
+                                    <li>
+                                        <div class="cata_select" id="diner">diner</div>
+                                    </li>
+
+                                </ul>
+                            </div>
+
+                            <label class="btn btn-warning active cata_select" id="Transport">
+                              <input type="radio" name="options" id="option2" autocomplete="off"> Transport
+                            </label>
+
+                            <label class="btn btn-warning cata_select" id="phone">
+                              <input type="radio" name="options" id="option3" autocomplete="off"> phone
+                            </label>
+
+                            <label class="btn btn-warning cata_select" id="beauty">
+                              <input type="radio" name="options" id="option4" autocomplete="off"> beauty
+                            </label>
+
+                            <label class="btn btn-warning cata_select" id="health">
+                                <input type="radio" name="options" id="option5" autocomplete="off"> health
+                              </label>
+
+                            <label class="btn btn-warning cata_select" id="online_shoping">
+                                <input type="radio" name="options" id="option6" autocomplete="off"> online_shoping
+                              </label>
+
+
+
+                        </div>
+
+                    </div>
+
+                    <div class="money-remark">
+                        <form id="mines-money-form">
+                            <div class="show-type-mines">
+                                <span id="show-type-mines">lunch</span>
+                            </div>
+
+                            <label for="money">Money:</label><br>
+                            <input type="money" id="money" name="money" placeholder="enter cost"><br>
+
+                            <label for="note">Note:</label><br>
+                            <input type="text" id="note" name="note" placeholder="enter note"><br><br>
+
+                            <input type="submit" value="Submit">
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <script src="/money.js"></script>
+
+</body>
+
+</html>
