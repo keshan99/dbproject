@@ -199,19 +199,24 @@
 
                         <div class="btn-group-vertical btn-group-toggle" data-toggle="buttons">
 
-
-
-                            <label class="btn btn-warning active cata_select" id="fiverr">
-                              <input type="radio" name="options" id="option2" autocomplete="off"> fiverr
+<% /*
+                            <label class="btn btn-warning active cata_select" id="1">
+                              <input type="radio" name="options" autocomplete="off"> fiverr_inn
                             </label>
 
-                            <label class="btn btn-warning cata_select" id="home">
-                              <input type="radio" name="options" id="option3" autocomplete="off"> home
+                            <label class="btn btn-warning cata_select" id="2">
+                              <input type="radio" name="options" autocomplete="off"> home
                             </label>
 
-                            <label class="btn btn-warning cata_select" id="part time job">
-                              <input type="radio" name="options" id="option4" autocomplete="off"> part time job
+                            <label class="btn btn-warning cata_select" id="3">
+                              <input type="radio" name="options" autocomplete="off"> part time job
                             </label>
+*/ %>
+                        <% for(var i = 0; i < moneyEnterIn.length; i++) { %>          
+                            <label class="btn btn-warning cata_select" id="<%=moneyEnterIn[i].Topic_ID%>">
+                              <input type="radio" name="options" autocomplete="off"> <%=moneyEnterIn[i].name%>
+                            </label>
+                        <% }%>
 
 
 
@@ -220,18 +225,18 @@
                     </div>
 
                     <div class="money-remark">
-                        <form id="pluse-money-form">
+                        <form id="pluse-money-form" class="form" method='POST'>
                             <div class="show-type-pluse">
-                                <span id="show-type-pluse">fiver</span>
+                                <span id="show-type-pluse"> plz select</span>
                             </div>
 
                             <label for="money">Money:</label><br>
-                            <input type="money" id="money2" name="money" placeholder="enter cost"><br>
+                            <input type="number" id="money2" name="money" required placeholder="enter cost"><br>
 
                             <label for="note">Note:</label><br>
                             <input type="text" id="note2" name="note" placeholder="enter note"><br><br>
+                            <input type="hidden" name="moneyItemID" id="hiddenInputPluse" />
                             <input type="submit" value="Submit">
-
                         </form>
 
                     </div>
@@ -258,17 +263,18 @@
                                 </label>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <div class="cata_select" id="breakfirst">breakfirst</div>
+                                        <div class="cata_select" id="1">breakfirst</div>
                                     </li>
                                     <li>
-                                        <div class="cata_select" id="lunch">Lunch</div>
+                                        <div class="cata_select" id="2">Lunch</div>
                                     </li>
                                     <li>
-                                        <div class="cata_select" id="diner">diner</div>
+                                        <div class="cata_select" id="3">diner</div>
                                     </li>
 
                                 </ul>
                             </div>
+<%/*
 
                             <label class="btn btn-warning active cata_select" id="Transport">
                               <input type="radio" name="options" id="option2" autocomplete="off"> Transport
@@ -289,6 +295,12 @@
                             <label class="btn btn-warning cata_select" id="online_shoping">
                                 <input type="radio" name="options" id="option6" autocomplete="off"> online_shoping
                               </label>
+*/%>
+                            <% for(var i = 0; i < moneyEnterOut.length; i++) { %>          
+                                <label class="btn btn-warning cata_select" id="<%=moneyEnterOut[i].Topic_ID%>">
+                                    <input type="radio" name="options" autocomplete="off"> <%=moneyEnterOut[i].name%>
+                                </label>
+                            <% }%>
 
 
 
@@ -297,9 +309,9 @@
                     </div>
 
                     <div class="money-remark">
-                        <form id="mines-money-form">
+                        <form id="mines-money-form" class="form" method='POST'>
                             <div class="show-type-mines">
-                                <span id="show-type-mines">lunch</span>
+                                <span id="show-type-mines">plz select</span>
                             </div>
 
                             <label for="money">Money:</label><br>
@@ -307,6 +319,8 @@
 
                             <label for="note">Note:</label><br>
                             <input type="text" id="note" name="note" placeholder="enter note"><br><br>
+
+                            <input type="hidden" name="moneyItemID" id="hiddenInputMines" />
 
                             <input type="submit" value="Submit">
                         </form>

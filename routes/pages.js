@@ -55,6 +55,8 @@ router.get('/money', detail.money, (req, res) => {
         res.render('money', {
             moneydetailIn: req.moneydetailIn,
             moneydetailOut: req.moneydetailOut,
+            moneyEnterIn: req.moneyEnterIn,
+            moneyEnterOut: req.moneyEnterOut,
             user: req.user
 
         });

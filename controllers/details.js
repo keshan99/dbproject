@@ -17,7 +17,7 @@ db.connect((error) => {
     if (error) {
         console.log(error);
     } else {
-        console.log("My sql connected.sss..");
+        //console.log("My sql connected");
     }
 })
 
@@ -61,11 +61,32 @@ exports.money = async(req, res, next) => {
                 // create user variable
                 req.user = result[0];
 
+                db.query('SELECT Topic_ID, name,in_or_out, priority  FROM topic_of_money WHERE User_id = ? ', [decoed.id], (error, result) => {
+                    if (result) {
+                        console.log(result);
+                        req.moneyEnterIn = [];
+                        req.moneyEnterOut = [];
+                        let inM = 0;
+                        let outM = 0;
+                        for (let i = 0; i < result.length; i++) {
+                            if (result[i].in_or_out == 1) {
+                                req.moneyEnterIn[inM] = result[i];
+                                inM++;
+                            } else {
+                                req.moneyEnterOut[outM] = result[i];
+                                outM++;
+                            }
+
+                        }
+
+                    }
+                })
+
                 db.query('SELECT R.RID, R.value, R.note, R.date_time, R.bil_img, TOM.in_or_out, TOM.name FROM record R JOIN topic_of_money TOM ON R.TID = TOM.Topic_ID where R.User_id = ?', [decoed.id], (error, result) => {
                     if (!result) {
                         return next();
                     }
-                    console.log(result);
+                    //console.log(result);
                     let inM = 0;
                     let outM = 0;
                     req.moneydetailIn = [];
@@ -90,6 +111,50 @@ exports.money = async(req, res, next) => {
                 })
             })
 
+        } catch (error) {
+            console.log(error);
+            return next();
+        }
+    } else {
+        return next();
+    }
+
+}
+
+exports.updateMoney = async(req, res, next) => {
+    if (req.cookies.jwt) {
+        try {
+            // TODO: verify the token
+            const decoed = await promisify(jwt.verify)(req.cookies.jwt,
+                process.env.JWT_SECRET)
+
+            console.log(decoed);
+
+            // TODO: cheak if still exists
+            db.query('SELECT * FROM user WHERE ID = ?', [decoed.id], (error, result) => {
+                console.log(result);
+
+                if (!result) {
+                    return next();
+                }
+
+                // create user variable
+                req.user = result[0];
+
+
+                const { moneyItemID, money, note } = req.body;
+                var tempBil_img = "no";
+                var currentdate = new Date();
+                db.query('INSERT INTO record SET ?', { value: money, note: note, bil_img: tempBil_img, date_time: currentdate, TID: moneyItemID, User_id: decoed.id }, (error, result) => {
+                    if (error) {
+                        console.log(error);
+                    } else {
+                        console.log(result);
+                        return res.status(200).redirect("/money");
+
+                    }
+                })
+            });
         } catch (error) {
             console.log(error);
             return next();
