@@ -12,6 +12,8 @@ router.get('/logout', authController.logout)
 router.post('/data', authController.data)
 router.post('/updateProfile', authController.updateProfile)
 router.post('/updateMoney', detail.updateMoney)
+router.post('/deleteMoneyRecode', detail.deleteMoneyRecode)
+router.post('/updateMoneyrecode', detail.updateMoneyrecode)
 
 
 

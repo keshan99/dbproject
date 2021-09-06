@@ -10,3 +10,8 @@
 
                 INSERT INTO `record` (`RID`, `value`, `note`, `date_time`, `bil_img`, `TID`, `User_id`) 
                 VALUES (NULL, '20', 'hello', '2021-08-18 08:57:46.000000', 'no', '11', '8');
+
+
+                DELETE FROM `record` WHERE `record`.`RID` = 8
+
+                UPDATE record SET value = ?,note = ?, TID = ? WHERE RID = ?

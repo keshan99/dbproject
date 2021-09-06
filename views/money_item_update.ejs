@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<!-- Created By CodingNepal - www.codingnepalweb.com -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drag & Drop Element | CodingNepal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.10.2/Sortable.min.js"></script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+body{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: #AEC9DD;
+  padding: 20px;
+}
+.wrapper{
+  background: #fff;
+  padding: 25px;
+  max-width: 460px;
+  width: 100%;
+  border-radius: 3px;
+  box-shadow: 0px 10px 15px rgba(0,0,0,0.1);
+}
+.wrapper .item{
+  color: #fff;
+  display: flex;
+  margin-bottom: 8px;
+  padding: 12px 17px;
+  background: #304B5F;
+  border-radius: 3px;
+  align-items: center;
+  justify-content: space-between;
+}
+.wrapper .item:last-child{
+  margin-bottom: 0px;
+}
+.wrapper .item .text{
+  font-size: 18px;
+  font-weight: 400;
+}
+.wrapper .item i{
+  font-size: 18px;
+  cursor: pointer;
+}
+.wrapper .off{
+  background:red;
+}
+    </style>
+
+</head>
+<body>
+  <div class="wrapper" id="wrapper">
+
+    <div class="item">
+      <i class="fas fa-bars"></i>
+      <span class="text">Draggable Element One</span>
+      <i class="fas fa-adjust" id="1"></i>
+    </div>
+
+    <div class="item">
+      <i class="fas fa-bars"></i>
+      <span class="text">Draggable Element Two</span>
+      <i class="fas fa-adjust" id="2" ></i>
+    </div>
+
+    <div class="item off">
+      <i class="fas fa-bars"></i>
+      <span class="text">Draggable Element Three</span>
+      <i class="fas fa-adjust" id="3"></i>
+    </div>
+
+    <div class="item">
+      <i class="fas fa-bars"></i>
+      <span class="text">Draggable Element Four</span>
+      <i class="fas fa-adjust" id="4"></i>
+    </div>
+
+    <div class="item">
+      <i class="fas fa-bars"></i>
+      <span class="text">Draggable Element Five</span>
+      <i class="fas fa-adjust" id="5"></i>
+      <i class="fas fa-adjust" style="color:#CE263D"></i>
+    </div>
+
+  </div>
+
+  <script src="/money_item_update.js"></script>
+
+</body>
+</html>

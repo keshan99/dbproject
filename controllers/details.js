@@ -48,11 +48,11 @@ exports.money = async(req, res, next) => {
             const decoed = await promisify(jwt.verify)(req.cookies.jwt,
                 process.env.JWT_SECRET)
 
-            console.log(decoed);
+            //console.log(decoed);
 
             // TODO: cheak if still exists
             db.query('SELECT * FROM user WHERE ID = ?', [decoed.id], (error, result) => {
-                console.log(result);
+                // console.log(result);
 
                 if (!result) {
                     return next();
@@ -63,7 +63,7 @@ exports.money = async(req, res, next) => {
 
                 db.query('SELECT Topic_ID, name,in_or_out, priority  FROM topic_of_money WHERE User_id = ? ', [decoed.id], (error, result) => {
                     if (result) {
-                        console.log(result);
+                        //console.log(result);
                         req.moneyEnterIn = [];
                         req.moneyEnterOut = [];
                         let inM = 0;
@@ -82,7 +82,7 @@ exports.money = async(req, res, next) => {
                     }
                 })
 
-                db.query('SELECT R.RID, R.value, R.note, R.date_time, R.bil_img, TOM.in_or_out, TOM.name FROM record R JOIN topic_of_money TOM ON R.TID = TOM.Topic_ID where R.User_id = ?', [decoed.id], (error, result) => {
+                db.query('SELECT R.RID, R.value, R.note, R.date_time, R.bil_img,R.TID, TOM.in_or_out, TOM.name FROM record R JOIN topic_of_money TOM ON R.TID = TOM.Topic_ID where R.User_id = ? ORDER BY date_time DESC', [decoed.id], (error, result) => {
                     if (!result) {
                         return next();
                     }
@@ -104,7 +104,6 @@ exports.money = async(req, res, next) => {
                             outM++;
 
                         }
-
                     }
                     return next();
 
@@ -128,6 +127,51 @@ exports.updateMoney = async(req, res, next) => {
             const decoed = await promisify(jwt.verify)(req.cookies.jwt,
                 process.env.JWT_SECRET)
 
+            // console.log(decoed);
+
+            // TODO: cheak if still exists
+            db.query('SELECT * FROM user WHERE ID = ?', [decoed.id], (error, result) => {
+                //console.log(result);
+
+                if (!result) {
+                    return next();
+                }
+
+                // create user variable
+                req.user = result[0];
+
+                const { moneyItemID, money, note } = req.body;
+                var tempBil_img = "no";
+                var currentdate = new Date();
+                db.query('INSERT INTO record SET ?', { value: money, note: note, bil_img: tempBil_img, date_time: currentdate, TID: moneyItemID, User_id: decoed.id }, (error, result) => {
+                    if (error) {
+                        console.log(error);
+                    } else {
+                        console.log(result);
+                        return res.status(200).redirect("/money");
+
+                    }
+                })
+            });
+        } catch (error) {
+            console.log(error);
+            return next();
+        }
+    } else {
+        return next();
+    }
+
+}
+
+
+
+exports.deleteMoneyRecode = async(req, res, next) => {
+    if (req.cookies.jwt) {
+        try {
+            // TODO: verify the token
+            const decoed = await promisify(jwt.verify)(req.cookies.jwt,
+                process.env.JWT_SECRET)
+
             console.log(decoed);
 
             // TODO: cheak if still exists
@@ -138,18 +182,60 @@ exports.updateMoney = async(req, res, next) => {
                     return next();
                 }
 
-                // create user variable
-                req.user = result[0];
+                const { RecodeID } = req.body;
 
-
-                const { moneyItemID, money, note } = req.body;
-                var tempBil_img = "no";
-                var currentdate = new Date();
-                db.query('INSERT INTO record SET ?', { value: money, note: note, bil_img: tempBil_img, date_time: currentdate, TID: moneyItemID, User_id: decoed.id }, (error, result) => {
+                db.query('DELETE FROM record WHERE RID = ?', [RecodeID], (error, result) => {
                     if (error) {
                         console.log(error);
                     } else {
                         console.log(result);
+                        return res.status(200).redirect("/money");
+
+                    }
+                })
+            });
+        } catch (error) {
+            console.log(error);
+            return next();
+        }
+    } else {
+        return next();
+    }
+
+}
+
+
+
+exports.updateMoneyrecode = async(req, res, next) => {
+    if (req.cookies.jwt) {
+        try {
+            // TODO: verify the token
+            const decoed = await promisify(jwt.verify)(req.cookies.jwt,
+                process.env.JWT_SECRET)
+
+            // console.log(decoed);
+            console.log("awaaaaaaaaaa1")
+
+            // TODO: cheak if still exists
+            db.query('SELECT * FROM user WHERE ID = ?', [decoed.id], (error, result) => {
+                //    console.log(result);
+
+                if (!result) {
+                    return next();
+                }
+
+                // create user variable
+                req.user = result[0];
+
+                const { moneyItemID, money, note, RecodeID } = req.body;
+                // var tempBil_img = "no";
+                console.log("awaaaaaaaaaaa")
+
+                db.query('UPDATE record SET value = ?,note = ?, TID = ? WHERE RID = ?', [money, note, moneyItemID, RecodeID], (error, result) => {
+                    if (error) {
+                        console.log(error);
+                    } else {
+                        console.log("ok now");
                         return res.status(200).redirect("/money");
 
                     }

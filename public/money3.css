@@ -192,6 +192,77 @@ p {
     font-size: 16px !important;
 }
 
+.postEdit {
+    position: absolute;
+    top: -15px;
+    left: -15px;
+    font-size: 15px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.377);
+    color: #296ca8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 7px 10px;
+}
+
+.editpostCon {
+    background-color: rgba(0, 0, 0, 0.6);
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.editpostCon.show-modal {
+    display: block;
+}
+
+.editpost {
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    position: absolute;
+    overflow: hidden;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 100%;
+    width: 400px;
+    animation-name: modalopen;
+    animation-duration: 1s;
+}
+
+.editpost-pluse-con {
+    padding: 10px;
+    display: grid;
+    grid-template-columns: repeat(2, 3fr);
+}
+
+.editpostCon-mines {
+    background-color: rgba(0, 0, 0, 0.6);
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.editpostCon-mines.show-modal {
+    display: block;
+}
+
+.editpost-mines-con {
+    padding: 10px;
+    display: grid;
+    grid-template-columns: repeat(2, 3fr);
+}
+
 @keyframes modalopen {
     from {
         opacity: 0;

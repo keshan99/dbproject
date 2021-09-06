@@ -151,8 +151,6 @@ form.addEventListener('submit', function(e) {
         isValidDOB(DOB);
 
     }
-
-
 });
 
 

@@ -17,7 +17,7 @@ db.connect((error) => {
     if (error) {
         console.log(error);
     } else {
-        console.log("My sql connected.sss..");
+        //console.log("My sql connected.sss..");
     }
 })
 
@@ -181,7 +181,6 @@ exports.login = async(req, res) => {
 
                 res.cookie('jwt', token, cookieOptions);
                 res.status(200).redirect("/");
-
             }
         })
 

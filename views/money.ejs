@@ -85,15 +85,21 @@
                             <div class="u-layout">
                                 <div class="u-layout-row">
                                     <div class="u-container-style u-layout-cell u-shape-rectangle u-size-30 u-layout-cell-1">
-                                        <div class="u-container-layout u-container-layout-1">
+                                        <div class="u-container-layout u-container-layout-1" id="ID_moneydetailIn"> 
+                                                <script>
 
+                                                    let clientmoneydetailIn = <%-JSON.stringify(moneydetailIn)%>;
 
+                                                </script>
 
 
                                             <% for(var i = 0; i < moneydetailIn.length; i++) { %>
-                                                    <div class="u-container-style u-expanded-width u-group u-palette-1-light-2 u-radius-7 u-shape-round u-group-3">
+
+
+                                            <div class="money_post u-container-style u-expanded-width u-group u-palette-1-light-2 u-radius-7 u-shape-round u-group-3">
                                                 <div class="u-container-layout u-valign-top-sm u-valign-top-xs u-container-layout-4">
                                                     <div class="u-container-style u-expanded-height u-group u-palette-4-base u-radius-10 u-shape-round u-group-4">
+                                                    <button class="postEdit" id=<%=i%>>✎</button>
                                                         <div class="u-container-layout u-container-layout-5">
                                                             <p class="u-small-text u-text u-text-default u-text-variant u-text-6"><%=moneydetailIn[i].date%></p>
                                                             <p class="u-align-center u-text u-text-default u-text-7"><%=moneydetailIn[i].value%> $</p>
@@ -101,8 +107,8 @@
                                                         </div>
                                                     </div>
                                                     <img class="u-expanded-height u-image u-image-round u-radius-10 u-image-2" src="images/2.svg" alt="" data-image-width="400" data-image-height="265">
-                                                    <p class="u-large-text u-text u-text-default u-text-palette-1-light-3 u-text-variant u-text-9" data-animation-name="fadeIn" data-animation-duration="1000" data-animation-delay="0" data-animation-direction=""><%=moneydetailIn[i].name%></p>
-                                                    <p class="u-text u-text-10"><%=moneydetailIn[i].note%><br>
+                                                    <p class="money_title u-large-text u-text u-text-default u-text-palette-1-light-3 u-text-variant u-text-9" data-animation-name="fadeIn"><%=moneydetailIn[i].name%></p>
+                                                    <p class="money_note u-text u-text-10"><%=moneydetailIn[i].note%><br>
                                                     </p>
                                                 </div>
                                             </div>
@@ -134,18 +140,26 @@
                                         </div>
                                     </div>
                                     <div class="u-container-style u-layout-cell u-size-30 u-layout-cell-2">
-                                        <div class="u-container-layout u-container-layout-8">
+                                        <div class="u-container-layout u-container-layout-8" id="ID_moneydetailOut">
+                                            
+                                            <script>
 
+                                                    let clientmoneydetailOut = <%-JSON.stringify(moneydetailOut)%>;
+
+                                                </script>
                                             <!-- -->
 
+                                                   
 
-
-                                            <!-- -->
+                                            <!--
+                                             <p class="money_title u-large-text u-text u-text-default u-text-variant u-text-white u-text-24" data-animation-name="fadeIn" data-animation-duration="1000" data-animation-delay="0" data-animation-direction=""><%=moneydetailOut[i].name%></p>
+                                             -->
 
                                             <% for(var i = 0; i < moneydetailOut.length; i++) { %>
-                                            <div class="u-container-style u-expanded-width u-group u-palette-1-light-2 u-radius-7 u-shape-round u-group-9">
+                                            <div class="money_post u-container-style u-expanded-width u-group u-palette-1-light-2 u-radius-7 u-shape-round u-group-9">
                                                 <div class="u-container-layout u-valign-top-lg u-valign-top-md u-valign-top-sm u-valign-top-xs u-container-layout-11">
                                                     <div class="u-container-style u-expanded-height u-group u-palette-2-light-1 u-radius-10 u-shape-round u-group-10">
+                                                         <button class="postEdit" id=<%=i%>>✎</button>
                                                         <div class="u-container-layout u-container-layout-12">
                                                             <p class="u-small-text u-text u-text-default u-text-variant u-text-21"><%=moneydetailOut[i].date%></p>
                                                             <p class="u-align-center u-text u-text-default u-text-22"><%=moneydetailOut[i].value%> $</p>
@@ -153,8 +167,8 @@
                                                         </div>
                                                     </div>
                                                     <img class="u-expanded-height u-image u-image-round u-radius-10 u-image-5" src="images/2.svg" alt="" data-image-width="400" data-image-height="265">
-                                                    <p class="u-large-text u-text u-text-default u-text-variant u-text-white u-text-24" data-animation-name="fadeIn" data-animation-duration="1000" data-animation-delay="0" data-animation-direction=""><%=moneydetailOut[i].name%></p>
-                                                    <p class="u-text u-text-25"><%=moneydetailOut[i].note%><br>
+                                                    <p class="money_title u-large-text u-text u-text-default u-text-variant u-text-white u-text-24"><%=moneydetailOut[i].name%></p>
+                                                    <p class="money_note u-text u-text-25"><%=moneydetailOut[i].note%><br>
                                                     </p>
                                                 </div>
                                             </div>
@@ -327,6 +341,96 @@
                     </div>
                 </div>
 
+            </div>
+        </div>
+
+
+
+
+
+
+        <div class="editpostCon" id="edit-modal-pluse-con">
+            <div class="editpost">
+                <div class="editpost-pluse-con">
+                    <div class="catagory" id="catagory3">
+                        <div class="btn-group-vertical btn-group-toggle" data-toggle="buttons">
+                        <% for(var i = 0; i < moneyEnterIn.length; i++) { %>          
+                            <label class="btn btn-warning cata_select" id="edit<%=moneyEnterIn[i].Topic_ID%>">
+                              <input type="radio" name="options" autocomplete="off"> <%=moneyEnterIn[i].name%>
+                            </label>
+                        <% }%>
+                        </div>
+                    </div>
+
+                    <div class="money-remark">
+                        <form id="edit_pluse-money-form" class="form" method='POST'>
+                            <div class="show-type-pluse">
+                                <span id="edit_show-type-pluse"> plz select</span>
+                            </div>
+                            <label for="money">Money:</label><br>
+                            <input type="number" id="edit_money_in" name="money" required placeholder="enter cost"><br>
+                            <label for="note">Note:</label><br>
+                            <input type="text" id="edit_note_in" name="note" placeholder="enter note"><br><br>
+                            <input type="hidden" name="moneyItemID" id="editpost-hiddenInputPluse" />
+                            <input type="hidden" name="RecodeID" id="editpost-hidden_RID_Pluse" value="5" />
+                            <input type="button" id="edit_form_in_delete" value="delete">
+                            
+                            <input id="edit_form_in_submit" type="submit" value="Submit" name="submitbtn">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="editpostCon-mines" id="edit-modal-mines-con">
+            <div class="editpost">
+                <div class="editpost-mines-con">
+                    <div class="catagory" id="catagory4">
+                        <div class="btn-group-vertical btn-group-toggle" data-toggle="buttons">
+
+                        <div class="btn-group">
+                                <label class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  <input type="radio" name="options" id="option2" autocomplete="off"> Food
+                                </label>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <div class="cata_select" id="edit1">breakfirst</div>
+                                    </li>
+                                    <li>
+                                        <div class="cata_select" id="edit2">Lunch</div>
+                                    </li>
+                                    <li>
+                                        <div class="cata_select" id="edit3">diner</div>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        <% for(var i = 0; i < moneyEnterOut.length; i++) { %>          
+                                <label class="btn btn-warning cata_select" id="edit<%=moneyEnterOut[i].Topic_ID%>">
+                                    <input type="radio" name="options" autocomplete="off"> <%=moneyEnterOut[i].name%>
+                                </label>
+                        <% }%>
+
+                        </div>
+                    </div>
+
+                    <div class="money-remark">
+                        <form id="edit_mines-money-form" class="form" method='POST'>
+                            <div class="show-type-mines">
+                                <span id="edit_show-type-mines"> plz select</span>
+                            </div>
+                            <label for="money">Money:</label><br>
+                            <input type="number" id="edit_money_out" name="money" required placeholder="enter cost"><br>
+                            <label for="note">Note:</label><br>
+                            <input type="text" id="edit_note_out" name="note" placeholder="enter note"><br><br>
+                            <input type="hidden" name="moneyItemID" id="editpost-hiddenInputMines" />
+                            <input type="hidden" name="RecodeID" id="editpost-hidden_RID_mines" value="5" />
+                            <input type="button" id="edit_form_out_delete" value="delete">
+                            
+                            <input id="edit_form_out_submit" type="submit" value="Submit" name="submitbtn">
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
 

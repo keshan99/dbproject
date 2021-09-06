@@ -10,16 +10,13 @@ dotenv.config({ path: __dirname + '/.env' });
 
 const app = express();
 
-
-
 const db = mysql.createConnection({
     host: process.env.DATABASE_HOST,
     user: process.env.DATABASE_USER,
     password: process.env.DATABASE_PASSWORD,
     port: process.env.DATABASE_PORT,
-    database: process.env.DATABASE
+    database: process.env.DATABASE,
 });
-
 
 const publicDirectory = path.join(__dirname, './public');
 app.use(express.static(publicDirectory));
@@ -32,11 +29,9 @@ app.use(cookieParser());
 //image part
 app.use(fileUpload());
 
-
 //register ejs engine
 //app.set('view engine', 'hbs');
 app.set('view engine', 'ejs');
-
 
 db.connect((error) => {
     if (error) {
@@ -54,9 +49,19 @@ app.use((req, res) => {
     res.status(404).render('404');
 });
 
-
-
-
 app.listen(5000, () => {
     console.log('Server started on port 5000');
 });
+
+
+/**
+ * 
+ * DATABASE = student-helper
+DATABASE_HOST = localhost
+DATABASE_USER = root
+DATABASE_PORT = 3306
+DATABASE_PASSWORD = 
+JWT_SECRET = mysupersecretpassword
+JWT_EXPIRES_IN = 90d
+JWT_COOKIE_EXPIRES = 90
+ */

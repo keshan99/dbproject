@@ -66,4 +66,11 @@ router.get('/money', detail.money, (req, res) => {
 
 });
 
+
+
+router.get('/test', (req, res) => {
+    res.render('money_item_update');
+
+});
+
 module.exports = router;
