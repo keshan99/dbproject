@@ -34,13 +34,12 @@ body{
 }
 .wrapper .item{
   color: #fff;
-  display: flex;
+  
   margin-bottom: 8px;
   padding: 12px 17px;
   background: #304B5F;
   border-radius: 3px;
   align-items: center;
-  justify-content: space-between;
 }
 .wrapper .item:last-child{
   margin-bottom: 0px;
@@ -56,46 +55,237 @@ body{
 .wrapper .off{
   background:red;
 }
+
+.wrapper .addNewOff{
+  display:none;
+}
+
+.BSubmit {
+  background-color: var(--background-color);
+  border: none;
+  color: var(--text-color);
+  font-size: 16px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.BSubmit:active {
+  transform: scale(0.98);
+}
+
+.BSubmit:focus {
+  outline: none;
+}
+
+.BClear {
+  background-color: var(--background-color);
+  border: none;
+  color: var(--text-color);
+  font-size: 16px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.BClear:active {
+  transform: scale(0.98);
+}
+
+.BClear:focus {
+  outline: none;
+}
+
+.control_button{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.BAdd {
+  background-color: var(--background-color);
+  border: none;
+  color: var(--text-color);
+  font-size: 16px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+.BAdd:active {
+  transform: scale(0.98);
+}
+
+.BAdd:focus {
+  outline: none;
+}
+
+.control_Add_button{
+  margin-left:10px;
+  border-radius: 5px;
+  background-color: #94BEDF;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.add_item{
+  margin-top:10px;
+  background-color: #94BEDF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #AEC9DD;
+  padding: 10px;
+}
+.edit_add_item{
+  margin:10px;
+  background-color: #94BEDF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #AEC9DD;
+  padding: 10px;
+}
+
+
+.InputADD {
+    width: 60%;
+    padding: 2px;
+    border-radius: 3px;
+    border-style: hidden;
+    border-color: #296ca8;
+}
+.Input_edit_ADD {
+    width: 70%;
+    padding: 2px;
+    border-radius: 3px;
+    border-style: hidden;
+    border-color: #296ca8;
+}
+
+.InputADD:focus {
+    outline: none;
+}
+
+
+.edit_item {
+    background-color: rgba(0, 0, 0, 0.6);
+    display:none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0; 
+}
+
+.edit_item.show-modal {
+    display: block;
+}
+
+.edit_item_con{
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    position: absolute;
+    overflow: hidden;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    animation-name: modalopen;
+    animation-duration: 1s;
+}
+.fa-bars{
+  margin-right:10px;
+}
+.fa-pen{
+  float:right;
+  margin-left:10px;
+}
+.items{
+  float:right;
+  margin-left:10px;
+}
+
+
     </style>
 
 </head>
 <body>
   <div class="wrapper" id="wrapper">
-
+  <div class="wra">
+    
     <div class="item">
       <i class="fas fa-bars"></i>
       <span class="text">Draggable Element One</span>
-      <i class="fas fa-adjust" id="1"></i>
+      <i class="fas fa-trash items"></i>
+      <i class="fas fa-pen"></i>
     </div>
 
     <div class="item">
       <i class="fas fa-bars"></i>
       <span class="text">Draggable Element Two</span>
-      <i class="fas fa-adjust" id="2" ></i>
-    </div>
-
-    <div class="item off">
-      <i class="fas fa-bars"></i>
-      <span class="text">Draggable Element Three</span>
-      <i class="fas fa-adjust" id="3"></i>
+      <i class="fas fa-trash items"></i>
+      <i class="fas fa-pen"></i>
     </div>
 
     <div class="item">
       <i class="fas fa-bars"></i>
-      <span class="text">Draggable Element Four</span>
-      <i class="fas fa-adjust" id="4"></i>
+      <span class="text">Three</span>
+      <i class="fas fa-trash items"></i>
+      <i class="fas fa-pen"></i>
+    </div>
+
+    <div class="item">
+      <i class="fas fa-bars"></i>
+      <span class="text">Four</span>
+      <i class="fas fa-trash items"></i>
+      <i class="fas fa-pen"></i>
     </div>
 
     <div class="item">
       <i class="fas fa-bars"></i>
       <span class="text">Draggable Element Five</span>
-      <i class="fas fa-adjust" id="5"></i>
-      <i class="fas fa-adjust" style="color:#CE263D"></i>
+      <i class="fas fa-trash items"></i>
+      <i class="fas fa-pen"></i>
     </div>
 
   </div>
 
-  <script src="/money_item_update.js"></script>
+
+<div class="add_item">
+    <input type="text" id="InputADD" class="InputADD"/>
+    <div class="control_Add_button">
+        <button class="BAdd" id="BAdd">
+        <i class="far fa-plus-square"></i> items
+      </button>
+    </div>
+</div>
+    <div class="control_button">
+      <button class="BClear" id="BClear">
+        cancel
+        <i class="far fa-window-close"></i>
+      </button>
+
+      <button class="BSubmit" id="UpdateSubmit">
+        submit
+        <i class="fas fa-user-edit"></i>
+      </button>
+    </div>
+
+
+  </div>
+<div class="edit_item" id="edit_item">
+  <div class="edit_item_con">
+    <div class="edit_add_item">
+        <input type="text" id="edit_ele" class="Input_edit_ADD"/>
+        <div class="control_Add_button">
+            <button class="BAdd" id="BEditEle">
+            <i class="fas fa-pen"></i>
+          </button>
+        </div>
+    </div>
+  </div>
+  
+</div>
+
+
+  <script src="/money_item_update.js"></script> 
 
 </body>
 </html>
