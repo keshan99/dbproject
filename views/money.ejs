@@ -234,7 +234,7 @@
                         </form>
 
 -->  
-                 <button class="postEdit"  onclick="window.location.href='/test'" style="z-index: 100; font-size: 25px ; top: -10px;left: -10px;" ><i class="fas fa-cog"></i></button> 
+                 <button class="postEdit"  onclick="window.location.href='/changeTitleIn'" style="z-index: 100; font-size: 25px ; top: -10px;left: -10px;" ><i class="fas fa-cog"></i></button> 
                         <% for(var i = 0; i < moneyEnterIn.length; i++) { %>  
                             <% if(moneyEnterIn[i].priority !== 1) { %>      
                                 <label class="btn btn-warning cata_select" id="<%=moneyEnterIn[i].Topic_ID%>">
@@ -321,11 +321,20 @@
                                 <input type="radio" name="options" id="option6" autocomplete="off"> online_shoping
                               </label>
 */%>
-                            <% for(var i = 0; i < moneyEnterOut.length; i++) { %>          
+            <!--                <% for(var i = 0; i < moneyEnterOut.length; i++) { %>          
                                 <label class="btn btn-warning cata_select" id="<%=moneyEnterOut[i].Topic_ID%>">
                                     <input type="radio" name="options" autocomplete="off"> <%=moneyEnterOut[i].name%>
                                 </label>
                             <% }%>
+-->
+                        <button class="postEdit"  onclick="window.location.href='/changeTitleOut'" style="z-index: 100; font-size: 25px ; top: -10px;left: -10px;" ><i class="fas fa-cog"></i></button> 
+                        <% for(var i = 0; i < moneyEnterOut.length; i++) { %>  
+                            <% if(moneyEnterOut[i].priority !== 1) { %>      
+                                <label class="btn btn-warning cata_select" id="<%=moneyEnterOut[i].Topic_ID%>">
+                                <input type="radio" name="options" autocomplete="off"> <%=moneyEnterOut[i].name%>
+                                </label>
+                            <% }%>
+                        <% }%>
 
 
 

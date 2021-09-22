@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<!-- Created By CodingNepal - www.codingnepalweb.com -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>change</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.10.2/Sortable.min.js"></script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+body{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: #AEC9DD;
+  padding: 20px;
+}
+.wrapper{
+  background: #fff;
+  padding: 25px;
+  max-width: 460px;
+  width: 100%;
+  border-radius: 3px;
+  box-shadow: 0px 10px 15px rgba(0,0,0,0.1);
+}
+.wrapper .item{
+  color: #fff;
+  
+  margin-bottom: 8px;
+  padding: 12px 17px;
+  background: #304B5F;
+  border-radius: 3px;
+  align-items: center;
+}
+.wrapper .item:last-child{
+  margin-bottom: 0px;
+}
+.wrapper .item .text{
+  font-size: 18px;
+  font-weight: 400;
+}
+.wrapper .item i{
+  font-size: 18px;
+  cursor: pointer;
+}
+.wrapper .off{
+  background:red;
+}
+
+.wrapper .addNewOff{
+  display:none;
+}
+
+.BSubmit {
+  background-color: var(--background-color);
+  border: none;
+  color: var(--text-color);
+  font-size: 16px;
+  padding: 13px 10px 10px 10px;
+  cursor: pointer;
+}
+
+.BSubmit:active {
+  transform: scale(0.98);
+}
+
+.BSubmit:focus {
+  outline: none;
+}
+
+.BClear {
+  background-color: var(--background-color);
+  border: none;
+  color: var(--text-color);
+  font-size: 16px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.BClear:active {
+  transform: scale(0.98);
+}
+
+.BClear:focus {
+  outline: none;
+}
+
+.control_button{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.BAdd {
+  background-color: var(--background-color);
+  border: none;
+  color: var(--text-color);
+  font-size: 16px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+.BAdd:active {
+  transform: scale(0.98);
+}
+
+.BAdd:focus {
+  outline: none;
+}
+
+.control_Add_button{
+  margin-left:10px;
+  border-radius: 5px;
+  background-color: #94BEDF;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.add_item{
+  margin-top:10px;
+  background-color: #94BEDF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #AEC9DD;
+  padding: 10px;
+}
+.edit_add_item{
+  margin:10px;
+  background-color: #94BEDF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #AEC9DD;
+  padding: 10px;
+}
+
+
+.InputADD {
+    width: 60%;
+    padding: 2px;
+    border-radius: 3px;
+    border-style: hidden;
+    border-color: #296ca8;
+}
+.Input_edit_ADD {
+    width: 70%;
+    padding: 2px;
+    border-radius: 3px;
+    border-style: hidden;
+    border-color: #296ca8;
+}
+
+.InputADD:focus {
+    outline: none;
+}
+
+
+.edit_item {
+    background-color: rgba(0, 0, 0, 0.6);
+    display:none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0; 
+}
+
+.edit_item.show-modal {
+    display: block;
+}
+
+.edit_item_con{
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    position: absolute;
+    overflow: hidden;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    animation-name: modalopen;
+    animation-duration: 1s;
+}
+.fa-bars{
+  margin-right:10px;
+}
+.fa-pen{
+  float:right;
+  margin-left:10px;
+}
+.items{
+  float:right;
+  margin-left:10px;
+}
+
+
+    </style>
+
+</head>
+<body>
+  <div class="wrapper" id="wrapper">
+  <div class="wra">
+
+    <script>
+        let moneyDetails = <%-JSON.stringify(moneyEnterOut)%>;
+    </script>
+
+  <% for(var i = 0; i < moneyEnterOut.length; i++) { %>   
+    <%if (moneyEnterOut[i].priority !== 1 && moneyEnterOut[i].priority !== 0) { %> 
+      <div class="item" id="<%=moneyEnterOut[i].Topic_ID%>">
+        <i class="fas fa-bars"></i>
+        <span class="text"><%=moneyEnterOut[i].name%></span>
+        <i class="fas fa-trash items"></i>
+        <i class="fas fa-pen"></i>
+      </div>
+    <% }%>
+  <% }%>
+  <% for(var i = 0; i < moneyEnterOut.length; i++) { %>   
+    <%if (moneyEnterOut[i].priority == 1) { %> 
+      <div class="item off" id="<%=moneyEnterOut[i].Topic_ID%>">
+        <i class="fas fa-bars"></i>
+        <span class="text"><%=moneyEnterOut[i].name%></span>
+        <i class="fas fa-trash-restore items"></i>
+        <i class="fas fa-pen"></i>
+      </div>
+    <% }%>
+  <% }%>
+ <!--   
+    <div class="item">
+      <i class="fas fa-bars"></i>
+      <span class="text">One</span>
+      <i class="fas fa-trash items"></i>
+      <i class="fas fa-pen"></i>
+    </div>
+
+    <div class="item">
+      <i class="fas fa-bars"></i>
+      <span class="text">Two</span>
+      <i class="fas fa-trash items"></i>
+      <i class="fas fa-pen"></i>
+    </div>
+
+    <div class="item">
+      <i class="fas fa-bars"></i>
+      <span class="text">Three</span>
+      <i class="fas fa-trash items"></i>
+      <i class="fas fa-pen"></i>
+    </div>
+
+    <div class="item">
+      <i class="fas fa-bars"></i>
+      <span class="text">Four</span>
+      <i class="fas fa-trash items"></i>
+      <i class="fas fa-pen"></i>
+    </div>
+
+    <div class="item off">
+      <i class="fas fa-bars"></i>
+      <span class="text">Drag Five</span>
+      <i class="fas fa-trash items"></i>
+      <i class="fas fa-pen"></i>
+    </div>
+-->
+  </div>
+
+
+<div class="add_item">
+    <input type="text" id="InputADD" class="InputADD"/>
+    <div class="control_Add_button">
+        <button class="BAdd" id="BAdd">
+        <i class="far fa-plus-square"></i> items
+      </button>
+    </div>
+</div>
+    <div class="control_button">
+      <button class="BClear" id="BClear" onclick="window.location.href='/money'">
+        cancel
+        <i class="far fa-window-close"></i>
+      </button>
+
+      
+
+
+      <form id = "form1" method="post">
+        <input type="hidden" name="list_data" id="list_data">
+        <input type="hidden" name="delete_data" id="delete_data">
+        <input type="hidden" name="rename_titles" id="rename_titles">
+        <input type="hidden" name="State_Change" id="State_Change">
+        <input type="hidden" name="new_items_name" id="new_items_name">
+        <input class="BSubmit" id="UpdateSubmit" type="submit" name="Bsubmit" value="Submit"><i class="fas fa-user-edit"></i>
+      </form>
+      </div>
+
+
+
+  </div>
+<div class="edit_item" id="edit_item">
+  <div class="edit_item_con">
+    <div class="edit_add_item">
+        <input type="text" id="edit_ele" class="Input_edit_ADD"/>
+        <div class="control_Add_button">
+            <button class="BAdd" id="BEditEle">
+            <i class="fas fa-pen"></i>
+          </button>
+        </div>
+    </div>
+  </div>
+  
+</div>
+
+
+  <script src="/money_item_update_OUT.js"></script> 
+
+</body>
+</html>
