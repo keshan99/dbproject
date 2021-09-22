@@ -68,9 +68,16 @@ router.get('/money', detail.money, (req, res) => {
 
 
 
-router.get('/test', (req, res) => {
-    res.render('money_item_update');
+router.get('/test', detail.money, (req, res) => {
+    res.render('money_item_update', {
+        moneyEnterIn: req.moneyEnterIn,
+        user: req.user
+    });
 
 });
+
+router.post('/updateMoneyTitleIn', detail.updateMoneyTitleIn)
+    //router.post('/updateMoneyTitleOut', detail.updateMoneyTitleOut)
+
 
 module.exports = router;

@@ -99,6 +99,13 @@ var client_RID = 0;
 moneydetailIn.addEventListener('click', (e) => {
     if (e.target.classList.contains('postEdit')) {
 
+        const cat3 = document.querySelectorAll(".cat3");
+        cat3.forEach(element => {
+            if (element.classList.contains('active')) {
+                element.classList.remove('active');
+            }
+        });
+
         console.log(e.target.id);
         console.log(clientmoneydetailIn[e.target.id]);
 
@@ -173,6 +180,13 @@ catagory4.addEventListener('click', (e) => {
 var client_RID = 0;
 moneydetailOut.addEventListener('click', (e) => {
     if (e.target.classList.contains('postEdit')) {
+
+        const cat4 = document.querySelectorAll(".cat4");
+        cat4.forEach(element => {
+            if (element.classList.contains('active')) {
+                element.classList.remove('active');
+            }
+        });
 
         console.log(e.target.id);
         console.log(clientmoneydetailOut[e.target.id]);
@@ -250,3 +264,11 @@ function filterPosts(e) {
         }
     });
 }
+
+const In_edit_title_button = document.getElementById("In_edit_title_button");
+In_edit_title_button.addEventListener("click", (e) => {
+    e.preventDefault();
+    In_edit_title_button.action = '/test';
+    In_edit_title_button.submit();
+
+})

@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="/money3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
 
     <link rel="stylesheet" href="/money2.css" media="screen">
     <link rel="stylesheet" href="/money1.css" media="screen">
@@ -224,11 +225,22 @@
                             <label class="btn btn-warning cata_select" id="3">
                               <input type="radio" name="options" autocomplete="off"> part time job
                             </label>
-*/ %>
-                        <% for(var i = 0; i < moneyEnterIn.length; i++) { %>          
-                            <label class="btn btn-warning cata_select" id="<%=moneyEnterIn[i].Topic_ID%>">
-                              <input type="radio" name="options" autocomplete="off"> <%=moneyEnterIn[i].name%>
-                            </label>
+*/ %>  
+<!--
+
+                     <form method="post" id="In_edit_title_button" action="/test" class="postEdit" style="z-index: 100; font-size: 20px ; top: -15px;left: -10px; border-radius: 50%;" >
+                            <input type="hidden" name="delete_data" id="delete_data" value="<%=moneyEnterIn%>">
+                            <input style="z-index: 110; border-radius: 50%;" type="submit" value="⚙️">
+                        </form>
+
+-->  
+                 <button class="postEdit"  onclick="window.location.href='/test'" style="z-index: 100; font-size: 25px ; top: -10px;left: -10px;" ><i class="fas fa-cog"></i></button> 
+                        <% for(var i = 0; i < moneyEnterIn.length; i++) { %>  
+                            <% if(moneyEnterIn[i].priority !== 1) { %>      
+                                <label class="btn btn-warning cata_select" id="<%=moneyEnterIn[i].Topic_ID%>">
+                                <input type="radio" name="options" autocomplete="off"> <%=moneyEnterIn[i].name%>
+                                </label>
+                            <% }%>
                         <% }%>
 
 
@@ -353,11 +365,13 @@
                 <div class="editpost-pluse-con">
                     <div class="catagory" id="catagory3">
                         <div class="btn-group-vertical btn-group-toggle" data-toggle="buttons">
-                        <% for(var i = 0; i < moneyEnterIn.length; i++) { %>          
-                            <label class="btn btn-warning cata_select" id="edit<%=moneyEnterIn[i].Topic_ID%>">
+                       <% for(var i = 0; i < moneyEnterIn.length; i++) { %>          
+                            <label class="btn btn-warning cata_select cat3" id="edit<%=moneyEnterIn[i].Topic_ID%>">
                               <input type="radio" name="options" autocomplete="off"> <%=moneyEnterIn[i].name%>
                             </label>
                         <% }%>
+
+
                         </div>
                     </div>
 
@@ -405,7 +419,7 @@
                                 </ul>
                             </div>
                         <% for(var i = 0; i < moneyEnterOut.length; i++) { %>          
-                                <label class="btn btn-warning cata_select" id="edit<%=moneyEnterOut[i].Topic_ID%>">
+                                <label class="btn btn-warning cata_select cat4" id="edit<%=moneyEnterOut[i].Topic_ID%>">
                                     <input type="radio" name="options" autocomplete="off"> <%=moneyEnterOut[i].name%>
                                 </label>
                         <% }%>

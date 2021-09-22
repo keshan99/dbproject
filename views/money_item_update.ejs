@@ -65,7 +65,7 @@ body{
   border: none;
   color: var(--text-color);
   font-size: 16px;
-  padding: 10px 20px;
+  padding: 13px 10px 10px 10px;
   cursor: pointer;
 }
 
@@ -209,17 +209,42 @@ body{
 <body>
   <div class="wrapper" id="wrapper">
   <div class="wra">
-    
+
+    <script>
+        let moneyDetails = <%-JSON.stringify(moneyEnterIn)%>;
+    </script>
+
+  <% for(var i = 0; i < moneyEnterIn.length; i++) { %>   
+    <%if (moneyEnterIn[i].priority !== 1 && moneyEnterIn[i].priority !== 0) { %> 
+      <div class="item" id="<%=moneyEnterIn[i].Topic_ID%>">
+        <i class="fas fa-bars"></i>
+        <span class="text"><%=moneyEnterIn[i].name%></span>
+        <i class="fas fa-trash items"></i>
+        <i class="fas fa-pen"></i>
+      </div>
+    <% }%>
+  <% }%>
+  <% for(var i = 0; i < moneyEnterIn.length; i++) { %>   
+    <%if (moneyEnterIn[i].priority == 1) { %> 
+      <div class="item off" id="<%=moneyEnterIn[i].Topic_ID%>">
+        <i class="fas fa-bars"></i>
+        <span class="text"><%=moneyEnterIn[i].name%></span>
+        <i class="fas fa-trash-restore items"></i>
+        <i class="fas fa-pen"></i>
+      </div>
+    <% }%>
+  <% }%>
+ <!--   
     <div class="item">
       <i class="fas fa-bars"></i>
-      <span class="text">Draggable Element One</span>
+      <span class="text">One</span>
       <i class="fas fa-trash items"></i>
       <i class="fas fa-pen"></i>
     </div>
 
     <div class="item">
       <i class="fas fa-bars"></i>
-      <span class="text">Draggable Element Two</span>
+      <span class="text">Two</span>
       <i class="fas fa-trash items"></i>
       <i class="fas fa-pen"></i>
     </div>
@@ -238,13 +263,13 @@ body{
       <i class="fas fa-pen"></i>
     </div>
 
-    <div class="item">
+    <div class="item off">
       <i class="fas fa-bars"></i>
-      <span class="text">Draggable Element Five</span>
+      <span class="text">Drag Five</span>
       <i class="fas fa-trash items"></i>
       <i class="fas fa-pen"></i>
     </div>
-
+-->
   </div>
 
 
@@ -262,11 +287,19 @@ body{
         <i class="far fa-window-close"></i>
       </button>
 
-      <button class="BSubmit" id="UpdateSubmit">
-        submit
-        <i class="fas fa-user-edit"></i>
-      </button>
-    </div>
+      
+
+
+      <form id = "form1" method="post">
+        <input type="hidden" name="list_data" id="list_data">
+        <input type="hidden" name="delete_data" id="delete_data">
+        <input type="hidden" name="rename_titles" id="rename_titles">
+        <input type="hidden" name="State_Change" id="State_Change">
+        <input type="hidden" name="new_items_name" id="new_items_name">
+        <input class="BSubmit" id="UpdateSubmit" type="submit" name="Bsubmit" value="Submit"><i class="fas fa-user-edit"></i>
+      </form>
+      </div>
+
 
 
   </div>

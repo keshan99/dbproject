@@ -61,7 +61,7 @@ exports.money = async(req, res, next) => {
                 // create user variable
                 req.user = result[0];
 
-                db.query('SELECT Topic_ID, name,in_or_out, priority  FROM topic_of_money WHERE User_id = ? ', [decoed.id], (error, result) => {
+                db.query('SELECT Topic_ID, name,in_or_out, priority  FROM topic_of_money WHERE User_id = ? ORDER BY topic_of_money.priority ASC', [decoed.id], (error, result) => {
                     if (result) {
                         //console.log(result);
                         req.moneyEnterIn = [];
@@ -69,14 +69,26 @@ exports.money = async(req, res, next) => {
                         let inM = 0;
                         let outM = 0;
                         for (let i = 0; i < result.length; i++) {
-                            if (result[i].in_or_out == 1) {
-                                req.moneyEnterIn[inM] = result[i];
-                                inM++;
-                            } else {
-                                req.moneyEnterOut[outM] = result[i];
-                                outM++;
+                            if (result[i].priority !== 1) {
+                                if (result[i].in_or_out == 1) {
+                                    req.moneyEnterIn[inM] = result[i];
+                                    inM++;
+                                } else {
+                                    req.moneyEnterOut[outM] = result[i];
+                                    outM++;
+                                }
                             }
-
+                        }
+                        for (let i = 0; i < result.length; i++) {
+                            if (result[i].priority == 1) {
+                                if (result[i].in_or_out == 1) {
+                                    req.moneyEnterIn[inM] = result[i];
+                                    inM++;
+                                } else {
+                                    req.moneyEnterOut[outM] = result[i];
+                                    outM++;
+                                }
+                            }
                         }
 
                     }
@@ -229,7 +241,7 @@ exports.updateMoneyrecode = async(req, res, next) => {
 
                 const { moneyItemID, money, note, RecodeID } = req.body;
                 // var tempBil_img = "no";
-                console.log("awaaaaaaaaaaa")
+                //console.log("awaaaaaaaaaaa")
 
                 db.query('UPDATE record SET value = ?,note = ?, TID = ? WHERE RID = ?', [money, note, moneyItemID, RecodeID], (error, result) => {
                     if (error) {
@@ -240,6 +252,160 @@ exports.updateMoneyrecode = async(req, res, next) => {
 
                     }
                 })
+            });
+        } catch (error) {
+            console.log(error);
+            return next();
+        }
+    } else {
+        return next();
+    }
+
+}
+
+
+// update Money Title
+exports.updateMoneyTitleIn = async(req, res, next) => {
+    if (req.cookies.jwt) {
+        try {
+            // TODO: verify the token
+            const decoed = await promisify(jwt.verify)(req.cookies.jwt,
+                process.env.JWT_SECRET)
+
+            // console.log(decoed);
+            //console.log("awaaaaaaaaaa1")
+
+            // TODO: cheak if still exists
+            db.query('SELECT * FROM user WHERE ID = ?', [decoed.id], (error, result) => {
+                //    console.log(result);
+
+                if (!result) {
+                    return next();
+                }
+
+                // create user variable
+                req.user = result[0];
+
+
+                const { list_data, delete_data, rename_titles, State_Change, new_items_name } = req.body;
+
+                let listData = JSON.parse(list_data);
+                let deleteData = JSON.parse(delete_data);
+                let renameTitles = JSON.parse(rename_titles);
+                let StateChange = JSON.parse(State_Change);
+                let new_itemsName = JSON.parse(new_items_name);
+
+
+                let topics = [];
+                //console.log(renameTitles[0]);
+
+
+
+
+                db.query('SELECT * FROM topic_of_money WHERE in_or_out = 1 AND User_id = ? ORDER BY topic_of_money.priority ASC', [decoed.id], (error, result) => {
+                        if (error) {
+                            console.log(error);
+                        } else {
+                            console.log("ok now");
+                            //return res.status(200).redirect("/money");
+                            topics = result;
+
+                            //update state changes, only delete titles
+                            //UPDATE topic_of_money SET `priority` = '5' WHERE topic_of_money.Topic_ID = 14;
+                            /*
+                                                        let tVal1 = 0;
+                                                        let tVal2 = 0;
+                                                        let tVal3 = 0;
+
+                                                        if (StateChange.length == 0) {
+                                                            tVal1 = 1;
+                                                        }
+                                                        if (renameTitles.length == 0) {
+                                                            tVal2 = 1;
+                                                        }
+                                                        if (listData.length == 0) {
+                                                            tVal2 = 1;
+                                                        }
+                                                        */
+
+                            StateChange.forEach((e, index) => {
+                                if ((e.new !== e.ori) && e.new == 'delete') {
+                                    db.query('UPDATE topic_of_money SET priority = 1 WHERE topic_of_money.Topic_ID = ?', [e.id], (error, result) => {
+                                        if (error) {
+                                            console.log(error);
+                                        }
+                                    });
+                                }
+                                //if (StateChange.length == index + 1) {
+                                //    tVal1 = 1;
+                                //}
+
+                            });
+
+                            //update title changes
+                            renameTitles.forEach((e, index) => {
+                                if ((e.new != e.ori)) {
+                                    db.query('UPDATE topic_of_money SET name = ? WHERE topic_of_money.Topic_ID = ?', [e.new, e.id], (error, result) => {
+                                        if (error) {
+                                            console.log(error);
+                                        }
+                                    });
+                                }
+                                //if (renameTitles.length == index + 1) {
+                                //    tVal2 = 1;
+                                //}
+                            });
+
+                            //update piority and add new titles
+
+                            let tempPiority = 2;
+                            for (let i = 0; i < listData.length; i++) {
+                                const ld = listData[i];
+                                if ((!((i + 2 == topics[i].priority) && (ld.id == topics[i].Topic_ID))) && (ld.id !== "") && (ld.id !== -1)) {
+                                    db.query('UPDATE topic_of_money SET priority = ? WHERE topic_of_money.Topic_ID = ?', [i + 2, ld.id], (error, result) => {
+                                        if (error) {
+                                            console.log(error);
+                                        }
+                                    });
+                                } else if (ld.id == "") {
+                                    //   INSERT INTO topic_of_money(Topic_ID, name, in_or_out, User_id, priority) VALUES(NULL, 'new one', '1', '8', '10');
+                                    //   db.query('INSERT INTO record SET ?', { value: money, note: note, bil_img: tempBil_img, date_time: currentdate, TID: moneyItemID, User_id: decoed.id }, (error, result) => {
+
+                                    db.query('INSERT INTO topic_of_money SET ?', { name: ld.title, in_or_out: 1, User_id: decoed.id, priority: i + 2 }, (error, result) => {
+
+                                    });
+                                    tempPiority = tempPiority + 1;
+                                    //if (listData.length == i + 1) {
+                                    //    tVal3 = 1;
+                                    //}
+
+                                }
+                            }
+
+                            //if (tVal1 == 1 && tval2 == 1 && tVal3 == 1) {
+                            //    return res.status(200).redirect("/money");
+                            //}
+                            return res.status(200).redirect("/money");
+                        }
+                    })
+                    /**
+                     * 
+                     * 
+                     * db.query('UPDATE record SET value = ?,note = ?, TID = ? WHERE RID = ?', [money, note, moneyItemID, RecodeID], (error, result) => {
+                        if (error) {
+                            console.log(error);
+                        } else {
+                            console.log("ok now");
+                            return res.status(200).redirect("/money");
+
+                        }
+                    })
+                     * 
+                     * 
+                     */
+
+
+
             });
         } catch (error) {
             console.log(error);
