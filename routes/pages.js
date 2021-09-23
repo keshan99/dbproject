@@ -53,6 +53,8 @@ router.get('/money', detail.money, (req, res) => {
 
     if (req.user) {
         res.render('money', {
+            totalIn: req.totalIn,
+            totalOut: req.totalOut,
             moneydetailIn: req.moneydetailIn,
             moneydetailOut: req.moneydetailOut,
             moneyEnterIn: req.moneyEnterIn,
@@ -85,7 +87,22 @@ router.get('/changeTitleOut', detail.money, (req, res) => {
 
 router.post('/updateMoneyTitleIn', detail.updateMoneyTitleIn);
 router.post('/updateMoneyTitleOut', detail.updateMoneyTitleOut);
-//router.post('/updateMoneyTitleOut', detail.updateMoneyTitleOut)
+
+
+router.get('/note', detail.note, (req, res) => {
+    res.render('note', {
+        notes: req.notes,
+        //moneyEnterOut: req.moneyEnterOut,
+        user: req.user
+    });
+
+});
+
+
+router.post('/addNote', detail.addnote);
+router.post('/updateNote', detail.updateNote);
+router.post('/deleteNote', detail.deleteNote);
+
 
 
 module.exports = router;

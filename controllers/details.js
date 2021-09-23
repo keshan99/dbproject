@@ -61,6 +61,19 @@ exports.money = async(req, res, next) => {
                 // create user variable
                 req.user = result[0];
 
+                db.query('SELECT SUM(record.value) AS "sum" FROM record INNER JOIN topic_of_money ON topic_of_money.Topic_ID =record.TID WHERE (record.User_id = ? AND record.date_time >= now() - interval 30 day) AND topic_of_money.in_or_out = 1', [decoed.id], (error, result) => {
+                    req.totalIn = 0;
+                    if (result) {
+                        req.totalIn = result[0].sum;
+                    }
+                });
+                db.query('SELECT SUM(record.value) AS "sum" FROM record INNER JOIN topic_of_money ON topic_of_money.Topic_ID =record.TID WHERE (record.User_id = ? AND record.date_time >= now() - interval 30 day) AND topic_of_money.in_or_out = 0', [decoed.id], (error, result) => {
+                    req.totalOut = 0;
+                    if (result) {
+                        req.totalOut = result[0].sum;
+                    }
+                });
+
                 db.query('SELECT Topic_ID, name,in_or_out, priority  FROM topic_of_money WHERE User_id = ? ORDER BY topic_of_money.priority ASC', [decoed.id], (error, result) => {
                     if (result) {
                         //console.log(result);
@@ -294,7 +307,6 @@ exports.updateMoneyTitleIn = async(req, res, next) => {
                 let renameTitles = JSON.parse(rename_titles);
                 let StateChange = JSON.parse(State_Change);
                 let new_itemsName = JSON.parse(new_items_name);
-
 
                 let topics = [];
                 //console.log(renameTitles[0]);
@@ -598,6 +610,130 @@ exports.updateMoneyTitleOut = async(req, res, next) => {
 
 
             });
+        } catch (error) {
+            console.log(error);
+            return next();
+        }
+    } else {
+        return next();
+    }
+
+}
+
+
+
+
+exports.note = async(req, res, next) => {
+    if (req.cookies.jwt) {
+        try {
+            // TODO: verify the token
+            const decoed = await promisify(jwt.verify)(req.cookies.jwt,
+                process.env.JWT_SECRET)
+
+            //console.log(decoed);
+
+            // TODO: cheak if still exists
+            db.query('SELECT U.L_name, N.Note_ID, N.date_time, N.title, N.note FROM user U INNER JOIN note N ON U.ID = N.User_id WHERE U.ID = ?', [decoed.id], (error, result) => {
+                //console.log(result);
+
+                if (!result) {
+                    return next();
+                }
+                // create user name
+                req.user = result[0].L_name;
+
+                req.notes = result;
+
+                return next();
+            });
+        } catch (error) {
+            console.log(error);
+            return next();
+        }
+    } else {
+        return next();
+    }
+
+}
+
+exports.addnote = async(req, res, next) => {
+    if (req.cookies.jwt) {
+        try {
+            // TODO: verify the token
+            const decoed = await promisify(jwt.verify)(req.cookies.jwt,
+                process.env.JWT_SECRET)
+
+            //console.log(decoed);
+            const { note, title } = req.body;
+            var currentdate = new Date();
+
+            db.query('INSERT INTO note SET ?', { title: title, note: note, User_id: decoed.id, date_time: currentdate }, (error, result) => {
+                return res.status(200).redirect("/note");
+            });
+
+        } catch (error) {
+            console.log(error);
+            return next();
+        }
+    } else {
+        return next();
+    }
+
+}
+
+
+
+exports.updateNote = async(req, res, next) => {
+    if (req.cookies.jwt) {
+        try {
+            // TODO: verify the token
+            const decoed = await promisify(jwt.verify)(req.cookies.jwt,
+                process.env.JWT_SECRET)
+
+            //console.log(decoed);
+            const { note, title, noteId } = req.body;
+            console.log([title, note, noteId, decoed.id])
+
+
+            db.query('UPDATE note SET title = ?, note = ? WHERE (note.Note_ID = ? AND note.User_id = ?) ', [title, note, noteId, decoed.id], (error, result) => {
+                if (error) {
+                    console.log(error);
+                }
+                console.log(result)
+                return res.status(200).redirect("/note");
+
+            });
+
+        } catch (error) {
+            console.log(error);
+            return next();
+        }
+    } else {
+        return next();
+    }
+
+}
+
+
+exports.deleteNote = async(req, res, next) => {
+    if (req.cookies.jwt) {
+        try {
+            // TODO: verify the token
+            const decoed = await promisify(jwt.verify)(req.cookies.jwt,
+                process.env.JWT_SECRET)
+
+            //console.log(decoed);
+            const { noteId } = req.body;
+            let Id = parseInt(noteId);
+            db.query(' DELETE FROM note WHERE (note.Note_ID = ? AND note.User_id = ? ) ', [Id, decoed.id], (error, result) => {
+                if (error) {
+                    console.log(error);
+                }
+                console.log(result)
+                return res.status(200).redirect("/note");
+
+            });
+
         } catch (error) {
             console.log(error);
             return next();

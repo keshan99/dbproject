@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>CodePen - Sticky notes using CSS3 and Google Fonts</title>
+    <link href="https://fonts.googleapis.com/css?family=Reenie+Beanie:regular" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400" rel="stylesheet">
+    <script src="https://use.fontawesome.com/0d394c3591.js"></script>
+    <link href="https://use.fontawesome.com/0d394c3591.css" media="all" rel="stylesheet">
+    <link rel="stylesheet" href="./note.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="stylesheet" href="./note.css">
+
+</head>
+
+<body>
+    <!-- partial:index.partial.html -->
+    <header class="container">
+
+    <script>
+        let notes = <%-JSON.stringify(notes)%>;
+    </script>
+
+        <button id="back" class="col-md-2 left back" onclick="window.location.href='/profile'" style="border-width: 0px; font-size: 30px;">
+          <i class="fas fa-long-arrow-alt-left"></i>
+        </button>
+        <button id="new" class="col-md-2 right add" style="border-width: 0px;">
+        <i class="fa fa-plus-circle" aria-hidden="true"></i> New note </button>
+    </header>
+    <div style="clear:both"></div>
+    <ul class="note_class">
+        <% for(var i = 0; i < notes.length; i++) { %>   
+            <li>
+            <a href="#" class="item" id=<%=i%>>
+                <h2><%=notes[i].title%></h2>
+                <p><%=notes[i].note%></p>
+                <p class="date"><%= (notes[i].date_time.getMonth() + 1) + "/" +  notes[i].date_time.getDate() + "/" +  notes[i].date_time.getFullYear() %></p>  
+            </a>
+        </li>
+        <% }%>
+    </ul>
+    <!-- partial -->
+
+
+
+    <div class="add_item" id="add_item">
+        <div class="add_item_con">
+            <form method="post" id="add_form">
+                <div class="form_unit">
+                    <label for="username">title</label>
+                    <input type="text" name="title" id="title" placeholder="Enter title" required />
+                </div>
+                <div class="form_unit">
+                    <label for="username">note</label>
+                    <input type="text" name="note" id="note" placeholder="Enter note" style="height: 70px;" required/>
+                </div>
+                <button id="add_submit_btn" type="submit" class="col-md-2 right submit" style="border-width: 0px; width: 150px; padding-right: 0px;padding-left: 0px;">
+                  add </button>
+            </form>
+        </div>
+    </div>
+
+    <div class="view_item" id="view_item">
+        <div class="view_item_con">
+            <form method="post" id="update_form">
+            
+                <div class="form_unit">
+                    <input type="text" name="title" required id="view_title" placeholder="Enter title" disabled/>
+                </div>
+                <div class="form_unit">  
+                    <textarea name="note" required id="view_note" placeholder="Enter note" rows="4" cols="50" disabled></textarea>
+                </div>
+                <input type="hidden" name="noteId" id="hiddenNoteId">
+                <button id="edit_submit_btn" type="submit" class="col-md-2 right submit" style="border-width: 0px; width: 150px; padding-right: 0px;padding-left: 0px;">update</button>
+                
+                <a class="view_item_edit" id="view_item_edit" >✎</a>
+                <input type="button" value="delete" id="edit_delete_btn" class="col-md-2 submit" style="border-width: 0px; width: 150px; padding-right: 0px;padding-left: 0px;border-left:10px;">
+            </form>
+        </div>
+    </div>
+
+    <script src="./note.js"></script>
+
+</body>
+
+</html>
