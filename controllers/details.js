@@ -640,7 +640,7 @@ exports.note = async(req, res, next) => {
                     return next();
                 }
                 // create user name
-                req.user = result[0].L_name;
+                req.user = result[0];
 
                 req.notes = result;
 
