@@ -116,12 +116,12 @@ exports.register = (req, res) => {
             });
         }
 
-        //let hashedPassword = await bcrypt.hash(password, 8);
-        //console.log(hashedPassword);
+        let hashedPassword = await bcrypt.hash(password, 8);
+        console.log(hashedPassword);
 
 
 
-        db.query('INSERT INTO user SET ?', { F_name: Fname, M_name: Mname, L_name: Lname, Email: email, password: password, DOB: DOB, gender: gender, batch: batch, department: department, city: city }, (errror, result) => {
+        db.query('INSERT INTO user SET ?', { F_name: Fname, M_name: Mname, L_name: Lname, Email: email, password: hashedPassword, DOB: DOB, gender: gender, batch: batch, department: department, city: city }, (errror, result) => {
             if (error) {
                 console.log(error);
             } else {
@@ -159,7 +159,7 @@ exports.login = async(req, res) => {
                 res.status(401).render('login', {
                     message: 'Email is incorrect'
                 })
-            } else if (!(password == results[0].password)) {
+            } else if (!(await bcrypt.compare(password, results[0].password))) {
                 res.status(401).render('login', {
                     message: 'password is incorrect'
                 })
