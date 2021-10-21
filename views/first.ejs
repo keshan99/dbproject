@@ -53,8 +53,15 @@
                     <a href="#" class="ml-0 mr-0 font-bold duration-100 md:ml-12 md:mr-3 lg:mr-8 transition-color hover:text-indigo-600">Home</a>
                     <a href="#features" class="mr-0 font-bold duration-100 md:mr-3 lg:mr-8 transition-color hover:text-indigo-600">Features</a>
                     <div class="flex flex-col block w-full font-medium border-t border-gray-200 md:hidden">
+                     <% if (typeof user !== 'undefined') { %>
+                        <a href="/profile" class="w-full py-2 font-bold text-center text-pink-500">profile</a>
+                        <a href="/auth/logout" class="relative inline-block w-full px-5 py-3 text-sm leading-none text-center text-white bg-indigo-700 fold-bold">logout</a>
+                     <% } else { %>
                         <a href="/login" class="w-full py-2 font-bold text-center text-pink-500">Login</a>
                         <a href="/register" class="relative inline-block w-full px-5 py-3 text-sm leading-none text-center text-white bg-indigo-700 fold-bold">signup</a>
+                     <% } %>
+
+                        
                     </div>
                 </nav>
 
