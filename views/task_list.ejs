@@ -144,93 +144,68 @@
 
 
 
-
+            
             <!-- update note -->
             <div class="update_win_0" id="update_note">
                 <div class="update_win_1" id="update_note_1">
-                    <div class="update_win_1_con">
-                                    <div class="wrapper" id="update_wrapper">
-                <div class="wra" id="update_wra">
-        
-                 
+                
                     <script>
-                        let items = <%-JSON.stringify(items)%>;
+                    let items = <%-JSON.stringify(items)%>;
                     </script>
 
+                    <div class="update_win_1_con">
+                        <div class="wrapper" id="update_wrapper">
 
-                 
-                <div class="item">
-                    <i  class="fa fa-bars" aria-hidden="true"></i>
-                    <span class="text">One</span>
-                    <i class="fa fa-trash-o items" aria-hidden="true"></i>
-                    <i class="fa fa-pencil" aria-hidden="true"></i>
-                </div>
-            
-                
-                    <div class="item off">
-                    <i  class="fa fa-bars" aria-hidden="true"></i>
-                    <span class="text">Drag Five</span>
-                    <i class="fa fa-trash-o items" aria-hidden="true"></i>
-                    <i class="fa fa-pencil" aria-hidden="true"></i>
-                    </div>
+                            <div class="noteNmaeAdd">
+                                <label for="topic">topic</label>
+                                <input type="text" id="InputUpdateNoteName" class="noteNmaeAddtext"/>
+                            </div>
 
+                            <div class="wra" id="update_wra_ID">
 
+                            </div>
 
+                                <div class="add_task">
+                                    <input type="text" id="InputADD_update" class="InputADD"/>
+                                    <div class="control_Add_button">
+                                        <button class="BAdd" id="add_note_BAdd_update">
+                                        <i class="fa fa-plus-square" aria-hidden="true"></i> task
+                                    </button>
+                                    </div>
+                                </div>
 
+                                 <div class="control_button">
+                                <button class="BClear" id="update_note_BClear" onclick="close_win()">
+                                    cancel
+                                    <i class="fa fa-times" aria-hidden="true"></i>
+                                </button>
 
-                </div>
+                                <form id = "form2" method="post">
+                                    <input type="hidden" name="update_list_data" id="update_note_list_data">
 
+                                    <input class="BSubmit" id="update_note_Submit" type="submit" name="Bsubmit" value="Update"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                </form>
+                                </div>
 
-                <div class="add_task">
-                    <input type="text" id="InputADD" class="InputADD"/>
-                    <div class="control_Add_button">
-                        <button class="BAdd" id="BAdd">
-                        <i class="fa fa-plus-square" aria-hidden="true"></i> task
-                    </button>
-                    </div>
-                </div>
-                    <div class="control_button">
-                    <button class="BClear" id="BClear" onclick="close_win()">
-                        cancel
-                        <i class="fa fa-times" aria-hidden="true"></i>
-                    </button>
-
-                    
-
-
-                    <form id = "form1" method="post">
-                        <input type="hidden" name="list_data" id="list_data">
-                        <input type="hidden" name="delete_data" id="delete_data">
-                        <input type="hidden" name="rename_titles" id="rename_titles">
-                        <input type="hidden" name="State_Change" id="State_Change">
-                        <input type="hidden" name="new_items_name" id="new_items_name">
-                        <input class="BSubmit" id="UpdateSubmit" type="submit" name="Bsubmit" value="Submit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                    </form>
-                    </div>
-
-
-
-                </div>
-                <div class="edit_item" id="edit_item">
-                    <div class="edit_item_con">
-                        <div class="edit_add_item">
-                            <input type="text" id="edit_ele" class="Input_edit_ADD"/>
-                            <div class="control_Add_button">
-                                <button class="BAdd" id="BEditEle_update">
-                                <i class="fas fa-pen"></i>
-                            </button>
+                        </div>
+                        <div class="edit_item" id="update_note_edit_item">
+                            <div class="edit_item_con">
+                                <div class="edit_add_item">
+                                    <input type="text" id="update_note_edit_ele" class="Input_edit_ADD"/>
+                                    <div class="control_Add_button">
+                                        <button class="BAdd" id="BEditEle_update">
+                                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
+
                     </div>
                 </div>
             </div>
             <!-- update note end -->
-
-                
-                <!-- Demo task list -->
-            </div>
+       
 
 
         </section>
