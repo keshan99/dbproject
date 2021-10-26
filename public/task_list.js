@@ -135,8 +135,8 @@ let senditem = {
     title: "",
     task: []
 };
-
-document.getElementById("form1").addEventListener("submit", (e) => {
+const form1 = document.getElementById("form1");
+form1.addEventListener("submit", (e) => {
     e.preventDefault();
     let tempL = document.querySelectorAll(".addNew");
     let itemsList = []
@@ -158,8 +158,17 @@ document.getElementById("form1").addEventListener("submit", (e) => {
 
         senditem.title = note_title.value;
         senditem.task = itemsList;
-        console.log(senditem);
+
+
+        document.getElementById("add_note_list_data").value = JSON.stringify(senditem);
+
+        console.log(document.getElementById("add_note_list_data").value);
+
+        form1.action = '/addTask';
+        form1.submit();
     }
+
+
 
 });
 
@@ -188,6 +197,7 @@ function create_dr_list_for_update(taskId) {
         var div = document.createElement("div");
         div.classList.add("item");
         div.classList.add("addNew");
+        div.id = "taskid" + task.id;
 
         div.innerHTML = ``;
 
@@ -254,7 +264,8 @@ document.getElementById("form2").addEventListener("submit", (e) => {
     tempL.forEach(ele => {
         if (!ele.classList.contains("addNewOff")) {
             if (ele.classList.contains("addNewWithUpdate")) {
-                let itemEle = { name: "", done: 0 }
+                let itemEle = { id: null, name: "", done: 0 }
+
                 itemEle.name = ele.innerText;
 
                 if (ele.children[3].classList.contains("fa-repeat")) {
@@ -263,8 +274,10 @@ document.getElementById("form2").addEventListener("submit", (e) => {
                 newItemList.push(itemEle)
 
             } else {
-                let itemEle = { name: "", done: 0 }
+                let itemEle = { id: null, name: "", done: 0 }
                 itemEle.name = ele.innerText;
+                itemEle.id = parseInt(ele.id.substring(6));
+
 
                 if (ele.children[3].classList.contains("fa-repeat")) {
                     itemEle.done = 1;

@@ -93,33 +93,28 @@ router.post('/deleteNote', detail.deleteNote);
 let item1 = {
     id: 1,
     title: "t1",
-    list: [{ name: "one", done: 0 },
-        { name: "two", done: 1 },
-        { name: "two", done: 0 }
+    list: [{ id: 100, name: "one", done: 0 },
+        { id: 101, name: "two", done: 1 },
+        { id: 102, name: "two", done: 0 }
     ]
 };
 
 let item2 = {
     id: 2,
     title: "t2",
-    list: [{ name: "one2", done: 0 }, { name: "two2", done: 1 }, { name: "two2", done: 1 }]
+    list: [{ id: 103, name: "one2", done: 0 }, { id: 104, name: "two2", done: 1 },
+        { id: 105, name: "two2", done: 1 }
+    ]
 };
 let item3 = {
     id: 3,
     title: "t2",
-    list: [{ name: "one2", done: 0 }, { name: "two2", done: 1 }, { name: "two2", done: 1 }]
+    list: [{ id: 106, name: "one2", done: 0 }, { id: 107, name: "two2", done: 1 },
+        { id: 108, name: "two2", done: 1 }
+    ]
 };
-let item4 = {
-    id: 4,
-    title: "t2",
-    list: [{ name: "one2", done: 0 }, { name: "two2", done: 1 }, { name: "two2", done: 1 }, { name: "two2", done: 1 }, { name: "two2", done: 1 }]
-};
-let item5 = {
-    id: 5,
-    title: "t2",
-    list: [{ name: "one2", done: 0 }, { name: "two2", done: 1 }, { name: "two2", done: 1 }, { name: "two2", done: 1 }, { name: "two2", done: 1 }]
-};
-let items = [item1, item2, item3, item4, item5]
+
+let items = [item1, item2, item3, ]
 
 router.get('/task', (req, res) => {
 
@@ -128,6 +123,8 @@ router.get('/task', (req, res) => {
     });
 
 });
+
+router.post('/addTask', detail.addTask);
 
 
 module.exports = router;

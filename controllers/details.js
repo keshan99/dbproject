@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const { promisify } = require('util');
 const fs = require('fs');
+const { count } = require("console");
 
 const db = mysql.createConnection({
     host: process.env.DATABASE_HOST,
@@ -734,6 +735,52 @@ exports.deleteNote = async(req, res, next) => {
 
             });
 
+        } catch (error) {
+            console.log(error);
+            return next();
+        }
+    } else {
+        return next();
+    }
+
+}
+
+
+
+exports.addTask = async(req, res, next) => {
+    if (req.cookies.jwt) {
+        try {
+            // TODO: verify the token
+            const decoed = await promisify(jwt.verify)(req.cookies.jwt,
+                process.env.JWT_SECRET)
+
+            console.log(decoed);
+
+            // TODO: cheak if still exists
+            db.query('SELECT * FROM user WHERE ID = ?', [decoed.id], (error, result) => {
+                console.log(result);
+
+                if (!result) {
+                    return next();
+                }
+
+                const { list_data } = req.body;
+                let data = JSON.parse(list_data);
+                console.log(data);
+
+
+                /** 
+                                db.query('DELETE FROM record WHERE RID = ?', [RecodeID], (error, result) => {
+                                    if (error) {
+                                        console.log(error);
+                                    } else {
+                                        console.log(result);
+                                        return res.status(200).redirect("/money");
+
+                                    }
+                                });
+                */
+            });
         } catch (error) {
             console.log(error);
             return next();

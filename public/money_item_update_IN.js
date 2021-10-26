@@ -104,8 +104,6 @@ BAdd.addEventListener('click', function(e) {
 
         dragArea.appendChild(div);
         InputADD.value = "";
-
-
     }
 
 });
