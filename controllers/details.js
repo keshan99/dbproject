@@ -1070,7 +1070,72 @@ exports.dashboard = async(req, res, next) => {
                         req.totalOut = 0;
                         if (result) {
                             req.totalOut = result[0].sum;
-                            return next();
+
+                            /////////////////////////////////
+
+                            db.query("SELECT P_ID,topic,priority FROM priority_list WHERE User_id = ?", [decoed.id], (error, result) => {
+                                let items = [];
+
+                                if (!result) {
+                                    return next();
+                                }
+
+
+                                result.forEach(resu => {
+                                    let item = {
+                                        id: 0,
+                                        title: "",
+                                        priority: 0,
+                                        list: []
+                                    }
+                                    item.id = parseInt(resu.P_ID);
+                                    item.title = resu.topic;
+                                    item.priority = resu.priority;
+                                    items.push(item)
+                                });
+
+
+                                db.query("SELECT pl.P_ID,T.task_id,T.name,T.done FROM task AS T JOIN priority_list AS pl ON pl.P_ID = T.pList_id JOIN user AS U ON U.ID = pl.User_id WHERE U.ID = ?", [decoed.id], (error, result) => {
+                                    if (!result) {
+
+                                        return next();
+                                    }
+                                    result.forEach(re => {
+                                        items.forEach(item => {
+                                            if (parseInt(item.id) == parseInt(re.P_ID)) {
+                                                let li = { id: 0, name: "", done: 0 };
+                                                li.id = re.task_id;
+                                                li.name = re.name;
+                                                li.done = re.done;
+                                                item.list.push(li)
+
+                                            }
+                                        });
+                                    });
+
+
+                                    req.tasks = items;
+                                    return next();
+
+
+                                });
+
+                            });
+                            /////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                         }
                     });
                 });

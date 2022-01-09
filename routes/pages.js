@@ -22,6 +22,7 @@ router.get('/dashboard', detail.dashboard, (req, res) => {
             note: req.notes,
             totalOut: req.totalOut,
             totalIn: req.totalIn,
+            tasks: req.tasks,
         });
     } else {
         return res.redirect('/login');

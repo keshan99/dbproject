@@ -90,20 +90,63 @@
                                     </div>
                                 </div> -->
 
-                                <% for(var i = 0; i < note.length; i++) { %>
-                                    <div class="u-container-style u-expanded-width u-group u-palette-3-light-2 u-radius-8 u-shape-round u-group-2">
-                                        <div class="u-container-layout u-container-layout-3">
-                                            <p class="u-text u-text-2">
-                                                <%=note[i].note%>
-                                            </p>
+                                <% if (tasks.length>6) { %>
+                                    <% for(var i = tasks.length-1; i > tasks.length-7; i--) { %>
+                                        <div class="u-container-style u-expanded-width u-group u-palette-3-light-2 u-radius-8 u-shape-round u-group-2">
+                                            
+                                            <div class="u-container-layout u-container-layout-3">
+                                                            <% let pos = 0 %> 
+                                                            <% let neg = 0 %> 
+                                                            <% for(var j = 0; j < tasks[i].list.length; j++) { %>
+                                                                <% if(tasks[i].list[j].done == 0){ %>
+                                                                    <% pos =pos+ 1 %>
+                                                                <% }else{neg =neg+ 1} %>
+                                                            <% } let pre = 100-(pos/(pos+neg)*100) %>
+                                                            <div class="task_presentage" style='
+                                                position: absolute;
+                                                background-color: #72efe9;
+                                                height: 100%;
+                                                width: <%=pre%>%;
+                                                top: 0;
+                                                left: 0;
+                                                border-radius: 7px;'>
+                                                
+                                            </div>
+                                                            <p class="u-text u-text-2">
+                                                                <%=tasks[i].title%>
+                                                               
+                                                            </p>
+                                            </div>
+                                            
                                         </div>
-                                    </div>
-                                    <% } %>
+                                        <% } %>
+                                            <% }else{ %>
+                                                <% for(var i = tasks.length-1; i > -1; i--) { %>
+                                                    <div class="u-container-style u-expanded-width u-group u-palette-3-light-2 u-radius-8 u-shape-round u-group-2">
+                                                        <div class="u-container-layout u-container-layout-3">
+                                                            <% let pos = 0 %> 
+                                                            <% let neg = 0 %> 
+                                                            <% for(var j = 0; j < tasks[i].list.length; j++) { %>
+                                                                <% if(tasks[i].list[j].done == 0){ %>
+                                                                    <% pos =pos+ 1 %>
+                                                                <% }else{neg =neg+ 1} %>
+                                                            <% } let pre = pos/(pos+neg)*100 %>
+                                                            <p class="u-text u-text-2">
+                                                                <%=tasks[i].title%>
+                                                                <%=pre%>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <% } %>
+                                                        <% } %>
 
 
 
 
-                                        <!-- <div class="u-container-style u-expanded-width u-group u-palette-3-light-2 u-radius-8 u-shape-round u-group-2">
+
+
+
+                                                            <!-- <div class="u-container-style u-expanded-width u-group u-palette-3-light-2 u-radius-8 u-shape-round u-group-2">
                                     <div class="u-container-layout u-container-layout-3">
                                         <p class="u-text u-text-2">note 01</p>
                                     </div>
@@ -124,11 +167,8 @@
                                     </div>
                                 </div> -->
 
-                                        <!-- <div class="u-container-style u-expanded-width u-group u-palette-4-light-1 u-radius-8 u-shape-round u-group-6">
-                                    <div class="u-container-layout u-container-layout-7"></div>
-                                </div>
-                                <p class="u-text u-text-6">note 01</p> -->
-                                        <a href="/task" class="u-btn u-button-style u-none u-text-hover-palette-2-base u-text-palette-1-base u-btn-2">VIEW More&nbsp;<span class="u-icon"><svg class="u-svg-content" viewBox="0 -32 426.66667 426" style="width: 1em; height: 1em;"><path d="m213.332031 181.667969c0 4.265625-1.277343 8.53125-3.625 11.730469l-106.667969 160c-3.839843 5.761718-10.238281 9.601562-17.707031 9.601562h-64c-11.730469 0-21.332031-9.601562-21.332031-21.332031 0-4.269531 1.28125-8.535157 3.625-11.734375l98.773438-148.265625-98.773438-148.269531c-2.34375-3.199219-3.625-7.464844-3.625-11.730469 0-11.734375 9.601562-21.335938 21.332031-21.335938h64c7.46875 0 13.867188 3.839844 17.707031 9.601563l106.667969 160c2.347657 3.199218 3.625 7.464844 3.625 11.734375zm0 0"></path><path d="m426.667969 181.667969c0 4.265625-1.28125 8.53125-3.628907 11.730469l-106.664062 160c-3.839844 5.761718-10.242188 9.601562-17.707031 9.601562h-64c-11.734375 0-21.335938-9.601562-21.335938-21.332031 0-4.269531 1.28125-8.535157 3.628907-11.734375l98.773437-148.265625-98.773437-148.269531c-2.347657-3.199219-3.628907-7.464844-3.628907-11.730469 0-11.734375 9.601563-21.335938 21.335938-21.335938h64c7.464843 0 13.867187 3.839844 17.707031 9.601563l106.664062 160c2.347657 3.199218 3.628907 7.464844 3.628907 11.734375zm0 0"></path></svg><img></span>
+                                                    
+                                                            <a href="/task" class="u-btn u-button-style u-none u-text-hover-palette-2-base u-text-palette-1-base u-btn-2">VIEW More&nbsp;<span class="u-icon"><svg class="u-svg-content" viewBox="0 -32 426.66667 426" style="width: 1em; height: 1em;"><path d="m213.332031 181.667969c0 4.265625-1.277343 8.53125-3.625 11.730469l-106.667969 160c-3.839843 5.761718-10.238281 9.601562-17.707031 9.601562h-64c-11.730469 0-21.332031-9.601562-21.332031-21.332031 0-4.269531 1.28125-8.535157 3.625-11.734375l98.773438-148.265625-98.773438-148.269531c-2.34375-3.199219-3.625-7.464844-3.625-11.730469 0-11.734375 9.601562-21.335938 21.332031-21.335938h64c7.46875 0 13.867188 3.839844 17.707031 9.601563l106.667969 160c2.347657 3.199218 3.625 7.464844 3.625 11.734375zm0 0"></path><path d="m426.667969 181.667969c0 4.265625-1.28125 8.53125-3.628907 11.730469l-106.664062 160c-3.839844 5.761718-10.242188 9.601562-17.707031 9.601562h-64c-11.734375 0-21.335938-9.601562-21.335938-21.332031 0-4.269531 1.28125-8.535157 3.628907-11.734375l98.773437-148.265625-98.773437-148.269531c-2.347657-3.199219-3.628907-7.464844-3.628907-11.730469 0-11.734375 9.601563-21.335938 21.335938-21.335938h64c7.464843 0 13.867187 3.839844 17.707031 9.601563l106.664062 160c2.347657 3.199218 3.628907 7.464844 3.628907 11.734375zm0 0"></path></svg><img></span>
                                  </a>
                             </div>
                         </div>

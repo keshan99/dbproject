@@ -293,5 +293,4 @@ exports.updateProfile = async(req, res) => {
         console.log(error);
     }
 
-
 }

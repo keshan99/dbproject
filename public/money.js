@@ -106,8 +106,8 @@ moneydetailIn.addEventListener('click', (e) => {
             }
         });
 
-        console.log(e.target.id);
-        console.log(clientmoneydetailIn[e.target.id]);
+        //console.log(e.target.id);
+        //console.log(clientmoneydetailIn[e.target.id]);
 
         client_RID = clientmoneydetailIn[e.target.id].RID;
         let client_name = clientmoneydetailIn[e.target.id].name;
