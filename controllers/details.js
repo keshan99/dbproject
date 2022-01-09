@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs');
 const { promisify } = require('util');
 const fs = require('fs');
 const { count } = require("console");
+const Q = require('q')
 
 const db = mysql.createConnection({
     host: process.env.DATABASE_HOST,
@@ -11,6 +12,7 @@ const db = mysql.createConnection({
     password: process.env.DATABASE_PASSWORD,
     database: process.env.DATABASE,
     port: '3306',
+    multipleStatements: true,
 
 });
 
@@ -780,7 +782,314 @@ exports.addTask = async(req, res, next) => {
                                     }
                                 });
                 */
+
+                db.query('INSERT INTO `priority_list` SET ?', { User_id: decoed.id, topic: data.title, priority: 0 }, (error, result) => {
+                    if (error) {
+                        console.log(error);
+                    } else {
+                        //console.log(result);
+                        //console.log(result.insertId);
+
+                        var sql = "INSERT INTO `task` (name, pList_id, done) VALUES ?";
+                        var values = []
+                        data.task.forEach(element => {
+                            temp = ['name', result.insertId, 0];
+                            temp[0] = element.name;
+                            temp[2] = element.done;
+                            console.log(temp);
+                            values.push(temp)
+                        });
+
+                        db.query(sql, [values], function(err) {
+                            if (err) throw err;
+                            return res.status(200).redirect("/task");
+                        });
+
+                    }
+                });
+
+
             });
+        } catch (error) {
+            console.log(error);
+            return next();
+        }
+    } else {
+        return next();
+    }
+
+}
+
+
+
+
+
+
+exports.getTask = async(req, res, next) => {
+    if (req.cookies.jwt) {
+        try {
+            // TODO: verify the token
+            const decoed = await promisify(jwt.verify)(req.cookies.jwt,
+                process.env.JWT_SECRET)
+
+            console.log(decoed);
+
+            // TODO: cheak if still exists
+            db.query('SELECT * FROM user WHERE ID = ?', [decoed.id], (error, result) => {
+                //console.log(result);
+
+                if (!result) {
+                    return next();
+                }
+                req.user = result[0];
+
+
+                db.query("SELECT P_ID,topic,priority FROM priority_list WHERE User_id = ?", [decoed.id], (error, result) => {
+                    let items = [];
+                    console.log("run")
+                    if (!result) {
+                        return next();
+                    }
+                    console.log("run1")
+
+                    result.forEach(resu => {
+                        let item = {
+                            id: 0,
+                            title: "",
+                            priority: 0,
+                            list: []
+                        }
+                        item.id = parseInt(resu.P_ID);
+                        item.title = resu.topic;
+                        item.priority = resu.priority;
+                        items.push(item)
+                    });
+                    console.log("run2")
+
+                    db.query("SELECT pl.P_ID,T.task_id,T.name,T.done FROM task AS T JOIN priority_list AS pl ON pl.P_ID = T.pList_id JOIN user AS U ON U.ID = pl.User_id WHERE U.ID = ?", [decoed.id], (error, result) => {
+                        if (!result) {
+                            console.log("run11")
+                            return next();
+                        }
+                        result.forEach(re => {
+                            items.forEach(item => {
+                                if (parseInt(item.id) == parseInt(re.P_ID)) {
+                                    let li = { id: 0, name: "", done: 0 };
+                                    li.id = re.task_id;
+                                    li.name = re.name;
+                                    li.done = re.done;
+                                    item.list.push(li)
+
+                                }
+                            });
+                        });
+                        console.log("run3")
+
+                        req.items = items;
+                        console.log("items");
+                        console.log(items);
+                        return next();
+
+                    });
+
+
+
+
+                });
+
+
+            });
+        } catch (error) {
+            console.log(error);
+            return next();
+        }
+    } else {
+        return next();
+    }
+
+}
+
+
+
+
+exports.deleteTask = async(req, res, next) => {
+    if (req.cookies.jwt) {
+        try {
+            // TODO: verify the token
+            const decoed = await promisify(jwt.verify)(req.cookies.jwt,
+                process.env.JWT_SECRET)
+
+            console.log(decoed);
+
+            // TODO: cheak if still exists
+            db.query('SELECT * FROM user WHERE ID = ?', [decoed.id], (error, result) => {
+                console.log(result);
+
+                if (!result) {
+                    return next();
+                }
+
+                var pid = req.params.id;
+                console.log(pid);
+                db.query(" DELETE task FROM task JOIN priority_list ON priority_list.P_ID = task.pList_id JOIN user ON user.ID = priority_list.User_id WHERE task.pList_id = ? AND user.ID = ?", [pid, decoed.id], (error, result) => {
+
+                    if (!result) {
+                        return next();
+                    }
+                    db.query("DELETE FROM priority_list WHERE priority_list.P_ID = ? AND priority_list.User_id = ?", [pid, decoed.id], (error, result) => {
+
+                        if (!result) {
+                            return next();
+                        }
+                        return next();
+
+                    });
+
+
+                });
+
+
+                return next();
+
+
+            });
+        } catch (error) {
+            console.log(error);
+            return next();
+        }
+    } else {
+        return next();
+    }
+
+}
+
+
+
+
+exports.updateTask = async(req, res, next) => {
+    if (req.cookies.jwt) {
+        try {
+            // TODO: verify the token
+            const decoed = await promisify(jwt.verify)(req.cookies.jwt,
+                process.env.JWT_SECRET)
+
+            console.log(decoed);
+
+            // TODO: cheak if still exists
+            db.query('SELECT * FROM user WHERE ID = ?', [decoed.id], (error, result) => {
+                console.log(result);
+
+                if (!result) {
+                    return next();
+                }
+
+
+                const { update_list_data } = req.body;
+                let data = JSON.parse(update_list_data);
+                console.log(data);
+
+                db.query('UPDATE `priority_list` SET `topic` = ? WHERE `priority_list`.`P_ID` = ?', [data.title, data.id], (error, result) => {
+                    console.log(result);
+
+                    if (!result) {
+                        return next();
+                    }
+                    var values = data.task;
+                    var queries = '';
+
+                    values.forEach(function(item) {
+                        queries += mysql.format("UPDATE task SET name = ? ,done = ? WHERE task_id = ? ;", [item.name, item.done, item.task_id]);
+                    });
+
+                    db.query(queries, (error, result) => {
+                        //////////////////
+                        if (data.newTask.length != 0) {
+                            var sql = "INSERT INTO `task` (name, pList_id, done) VALUES ?";
+                            var values = []
+                            data.newTask.forEach(element => {
+                                temp = ['name', data.id, 0];
+                                temp[0] = element.name;
+                                temp[2] = element.done;
+                                console.log(temp);
+                                values.push(temp)
+                            });
+
+                            db.query(sql, [values], function(err) {
+                                if (err) throw err;
+                                return res.status(200).redirect("/task");
+                            });
+                        } else {
+                            return res.status(200).redirect("/task");
+                        }
+
+                        ///////////////
+
+                    });
+
+
+                });
+
+
+            });
+        } catch (error) {
+            console.log(error);
+            return next();
+        }
+    } else {
+        return next();
+    }
+
+}
+
+
+
+exports.dashboard = async(req, res, next) => {
+    if (req.cookies.jwt) {
+        try {
+            // TODO: verify the token
+            const decoed = await promisify(jwt.verify)(req.cookies.jwt,
+                process.env.JWT_SECRET)
+
+            //console.log(decoed);
+
+
+            db.query('SELECT note FROM `note` WHERE `User_id` = ? ORDER BY Note_ID DESC LIMIT 6', [decoed.id], (error, result) => {
+                //console.log(result);
+                if (!result) {
+                    return next();
+                }
+                req.user = "ok";
+                req.notes = result;
+
+                db.query('SELECT SUM(record.value) AS "sum" FROM record INNER JOIN topic_of_money ON topic_of_money.Topic_ID =record.TID WHERE (record.User_id = ? AND record.date_time >= now() - interval 30 day) AND topic_of_money.in_or_out = 1', [decoed.id], (error, result) => {
+                    req.totalIn = 0;
+                    if (result) {
+                        req.totalIn = result[0].sum;
+                    }
+                    db.query('SELECT SUM(record.value) AS "sum" FROM record INNER JOIN topic_of_money ON topic_of_money.Topic_ID =record.TID WHERE (record.User_id = ? AND record.date_time >= now() - interval 30 day) AND topic_of_money.in_or_out = 0', [decoed.id], (error, result) => {
+                        req.totalOut = 0;
+                        if (result) {
+                            req.totalOut = result[0].sum;
+                            return next();
+                        }
+                    });
+                });
+
+
+
+
+
+
+
+
+
+
+
+            });
+
+
+
+
         } catch (error) {
             console.log(error);
             return next();

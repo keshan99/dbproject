@@ -28,10 +28,16 @@ function close_win() {
 
 window.addEventListener('click', (e) => {
     //console.log(e.target.classList)
-    e.target == add_note_edit_item ? add_note_edit_item.classList.remove('show-modal') : false;
     e.target == update_note_edit_item ? update_note_edit_item.classList.remove('show-modal') : false;
+    //e.target == update_note_1 ? update_note.classList.remove('show-modal') : false;
+    e.target == add_note_edit_item ? add_note_edit_item.classList.remove('show-modal') : false;
     e.target == add_note_1 ? add_note.classList.remove('show-modal') : false;
-    e.target == update_note_1 ? update_note.classList.remove('show-modal') : false;
+
+    if (e.target == update_note_1) {
+        update_note.classList.remove('show-modal');
+        update_note_edit_item.classList.remove('show-modal');
+    }
+
 
 
 
@@ -82,6 +88,13 @@ window.addEventListener('click', (e) => {
         //console.log(temp.innerText)
         document.getElementById("update_note_edit_ele").value = temp.innerText;
 
+    }
+    if (e.target.classList.contains("deletebtnforjs1")) {
+        //console.log(e.target.parentElement.id);
+        window.location.href = `/delete/task/${e.target.parentElement.id}`;
+    } else if (e.target.classList.contains("deletebtnforjs2")) {
+        //console.log(e.target.parentElement.parentElement.id);
+        window.location.href = `/delete/task/${e.target.parentElement.parentElement.id}`;
     }
 });
 
@@ -158,12 +171,9 @@ form1.addEventListener("submit", (e) => {
 
         senditem.title = note_title.value;
         senditem.task = itemsList;
-
-
         document.getElementById("add_note_list_data").value = JSON.stringify(senditem);
 
-        console.log(document.getElementById("add_note_list_data").value);
-
+        //console.log(senditem);
         form1.action = '/addTask';
         form1.submit();
     }
@@ -254,8 +264,8 @@ let updateitem = {
     newTask: []
 };
 
-
-document.getElementById("form2").addEventListener("submit", (e) => {
+const form2 = document.getElementById("form2");
+form2.addEventListener("submit", (e) => {
     e.preventDefault();
     let tempL = document.querySelectorAll(".addNew");
     let itemsList = []
@@ -264,19 +274,19 @@ document.getElementById("form2").addEventListener("submit", (e) => {
     tempL.forEach(ele => {
         if (!ele.classList.contains("addNewOff")) {
             if (ele.classList.contains("addNewWithUpdate")) {
-                let itemEle = { id: null, name: "", done: 0 }
+                let itemEle = { task_id: null, name: "", done: 0 }
 
                 itemEle.name = ele.innerText;
 
-                if (ele.children[3].classList.contains("fa-repeat")) {
+                if (ele.children[4].classList.contains("fa-repeat")) {
                     itemEle.done = 1;
                 }
                 newItemList.push(itemEle)
 
             } else {
-                let itemEle = { id: null, name: "", done: 0 }
+                let itemEle = { task_id: null, name: "", done: 0 }
                 itemEle.name = ele.innerText;
-                itemEle.id = parseInt(ele.id.substring(6));
+                itemEle.task_id = parseInt(ele.id.substring(6));
 
 
                 if (ele.children[3].classList.contains("fa-repeat")) {
@@ -298,7 +308,10 @@ document.getElementById("form2").addEventListener("submit", (e) => {
         updateitem.newTask = newItemList;
         updateitem.id = temp_task_id;
 
+        document.getElementById("update_note_list_data").value = JSON.stringify(updateitem);
         console.log(updateitem);
+        form2.action = '/updateTask';
+        form2.submit();
 
     }
 

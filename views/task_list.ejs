@@ -19,7 +19,7 @@
     <body>
         <header class="container">
 
-            <button id="back" class="col-md-2 left back" onclick="window.location.href='/profile'" style="border-width: 0px; font-size: 30px;">
+            <button id="back" class="col-md-2 left back" onclick="window.location.href='/'" style="border-width: 0px; font-size: 30px;">
             <i class="fa fa-arrow-left"></i>
             </button>
 
@@ -28,54 +28,60 @@
         </header>
         <div style="clear:both"></div>
         <section class="container">
-            
+
             <div id="stick-box" class="row">
 
 
-                <% for(var i = 0; i < items.length; i++) { %>   
+                <% for(var i = 0; i < items.length; i++) { %>
 
                     <div class="col-md-4 list-col" id="<%=items[i].id%>">
-                        <button class="del stick-icon deletebtnforjs" >
-                            <i class="fa fa-trash-o items deletebtnforjs" aria-hidden="true"></i>
+                        <button class="del stick-icon deletebtnforjs deletebtnforjs1">
+                            <i class="fa fa-trash-o items deletebtnforjs deletebtnforjs2" aria-hidden="true"></i>
                         </button>
                         <div class="col-md-12 list">
-                            <h2 class="list-title"> <%=items[i].title%></h2>
-                            <ul  contenteditable="true" class="task-wrapper">
+                            <h2 class="list-title">
+                                <%=items[i].title%>
+                            </h2>
+                            <ul contenteditable="true" class="task-wrapper">
 
-                                <% for(var j = 0; j < items[i].list.length; j++) { %> 
-                                      <% if(items[i].list[j].done == 0){ %>
-                                        <li class="task"><%=items[i].list[j].name%></li>
-                                      <% } else{%>
-                                         <li class="task complete"><%=items[i].list[j].name%></li>
-                                      <% }%>       
-                                <% }%>
+                                <% for(var j = 0; j < items[i].list.length; j++) { %>
+                                    <% if(items[i].list[j].done == 0){ %>
+                                        <li class="task">
+                                            <%=items[i].list[j].name%>
+                                        </li>
+                                        <% } else{%>
+                                            <li class="task complete">
+                                                <%=items[i].list[j].name%>
+                                            </li>
+                                            <% }%>
+                                                <% }%>
 
 
                             </ul>
-                        </div> 
+                        </div>
                     </div>
 
-                <% }%>
+                    <% }%>
 
 
 
 
 
 
-            <!-- add note -->
-            <div class="add_note_win_0" id="add_note">
-                <div class="add_note_win_1" id="add_note_1">
-                    <div class="add_note_win_1_con">
-                        <div class="wrapper" id="add_note_wrapper">
+                        <!-- add note -->
+                        <div class="add_note_win_0" id="add_note">
+                            <div class="add_note_win_1" id="add_note_1">
+                                <div class="add_note_win_1_con">
+                                    <div class="wrapper" id="add_note_wrapper">
 
-                        <div class="noteNmaeAdd">
-                         <label for="topic">topic</label>
-                        <input type="text" id="InputADDNoteName" class="noteNmaeAddtext"/>
-                        </div>
-                         
-                <div class="wra" id="wra_ID">
-                
-                   <!--            
+                                        <div class="noteNmaeAdd">
+                                            <label for="topic">topic</label>
+                                            <input type="text" id="InputADDNoteName" class="noteNmaeAddtext" />
+                                        </div>
+
+                                        <div class="wra" id="wra_ID">
+
+                                            <!--            
                     <div class="item">
                     <i  class="fa fa-bars" aria-hidden="true"></i>
                     <span class="text">One</span>
@@ -93,119 +99,119 @@
                     <i class="fa fa-repeat mark" aria-hidden="true"></i>
                     </div>
 
-                    --> 
+                    -->
 
-                </div>
+                                        </div>
 
 
-                <div class="add_task">
-                    <input type="text" id="InputADD" class="InputADD"/>
-                    <div class="control_Add_button">
-                        <button class="BAdd" id="add_note_BAdd">
+                                        <div class="add_task">
+                                            <input type="text" id="InputADD" class="InputADD" />
+                                            <div class="control_Add_button">
+                                                <button class="BAdd" id="add_note_BAdd">
                         <i class="fa fa-plus-square" aria-hidden="true"></i> task
                     </button>
-                    </div>
-                </div>
-                    <div class="control_button">
-                    <button class="BClear" id="add_note_BClear" onclick="close_win()">
+                                            </div>
+                                        </div>
+                                        <div class="control_button">
+                                            <button class="BClear" id="add_note_BClear" onclick="close_win()">
                         cancel
                         <i class="fa fa-times" aria-hidden="true"></i>
                     </button>
 
-                    
-
-
-                    <form id = "form1" method="post">
-                        <input type="hidden" name="list_data" id="add_note_list_data">
-
-                        <input class="BSubmit" id="add_note_Submit" type="submit" name="Bsubmit" value="Submit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                    </form>
-                    </div>
 
 
 
-                </div>
-                <div class="edit_item" id="add_note_edit_item">
-                    <div class="edit_item_con">
-                        <div class="edit_add_item">
-                            <input type="text" id="add_note_edit_ele" class="Input_edit_ADD"/>
-                            <div class="control_Add_button">
-                                <button class="BAdd" id="BEditEle_add">
+                                            <form id="form1" method="post">
+                                                <input type="hidden" name="list_data" id="add_note_list_data">
+
+                                                <input class="BSubmit" id="add_note_Submit" type="submit" name="Bsubmit" value="Submit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                            </form>
+                                        </div>
+
+
+
+                                    </div>
+                                    <div class="edit_item" id="add_note_edit_item">
+                                        <div class="edit_item_con">
+                                            <div class="edit_add_item">
+                                                <input type="text" id="add_note_edit_ele" class="Input_edit_ADD" />
+                                                <div class="control_Add_button">
+                                                    <button class="BAdd" id="BEditEle_add">
                                     <i class="fa fa-pencil" aria-hidden="true"></i>
                                 </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                    </div>
-                </div>
-            </div>
-            <!-- add note end -->
-
-
-
-            
-            <!-- update note -->
-            <div class="update_win_0" id="update_note">
-                <div class="update_win_1" id="update_note_1">
-                
-                    <script>
-                    let items = <%-JSON.stringify(items)%>;
-                    </script>
-
-                    <div class="update_win_1_con">
-                        <div class="wrapper" id="update_wrapper">
-
-                            <div class="noteNmaeAdd">
-                                <label for="topic">topic</label>
-                                <input type="text" id="InputUpdateNoteName" class="noteNmaeAddtext"/>
-                            </div>
-
-                            <div class="wra" id="update_wra_ID">
-
-                            </div>
-
-                                <div class="add_task">
-                                    <input type="text" id="InputADD_update" class="InputADD"/>
-                                    <div class="control_Add_button">
-                                        <button class="BAdd" id="add_note_BAdd_update">
-                                        <i class="fa fa-plus-square" aria-hidden="true"></i> task
-                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                        <!-- add note end -->
 
-                                 <div class="control_button">
-                                <button class="BClear" id="update_note_BClear" onclick="close_win()">
+
+
+
+                        <!-- update note -->
+                        <div class="update_win_0" id="update_note">
+                            <div class="update_win_1" id="update_note_1">
+
+                                <script>
+                                    let items = <%-JSON.stringify(items)%>;
+                                </script>
+
+                                <div class="update_win_1_con">
+                                    <div class="wrapper" id="update_wrapper">
+
+                                        <div class="noteNmaeAdd">
+                                            <label for="topic">topic</label>
+                                            <input type="text" id="InputUpdateNoteName" class="noteNmaeAddtext" />
+                                        </div>
+
+                                        <div class="wra" id="update_wra_ID">
+
+                                        </div>
+
+                                        <div class="add_task">
+                                            <input type="text" id="InputADD_update" class="InputADD" />
+                                            <div class="control_Add_button">
+                                                <button class="BAdd" id="add_note_BAdd_update">
+                                        <i class="fa fa-plus-square" aria-hidden="true"></i> task
+                                    </button>
+                                            </div>
+                                        </div>
+
+                                        <div class="control_button">
+                                            <button class="BClear" id="update_note_BClear" onclick="close_win()">
                                     cancel
                                     <i class="fa fa-times" aria-hidden="true"></i>
                                 </button>
 
-                                <form id = "form2" method="post">
-                                    <input type="hidden" name="update_list_data" id="update_note_list_data">
+                                            <form id="form2" method="post">
+                                                <input type="hidden" name="update_list_data" id="update_note_list_data">
 
-                                    <input class="BSubmit" id="update_note_Submit" type="submit" name="Bsubmit" value="Update"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                </form>
-                                </div>
+                                                <input class="BSubmit" id="update_note_Submit" type="submit" name="Bsubmit" value="Update"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                            </form>
+                                        </div>
 
-                        </div>
-                        <div class="edit_item" id="update_note_edit_item">
-                            <div class="edit_item_con">
-                                <div class="edit_add_item">
-                                    <input type="text" id="update_note_edit_ele" class="Input_edit_ADD"/>
-                                    <div class="control_Add_button">
-                                        <button class="BAdd" id="BEditEle_update">
+                                    </div>
+                                    <div class="edit_item" id="update_note_edit_item">
+                                        <div class="edit_item_con">
+                                            <div class="edit_add_item">
+                                                <input type="text" id="update_note_edit_ele" class="Input_edit_ADD" />
+                                                <div class="control_Add_button">
+                                                    <button class="BAdd" id="BEditEle_update">
                                             <i class="fa fa-pencil" aria-hidden="true"></i>
                                         </button>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
+                        <!-- update note end -->
 
-                    </div>
-                </div>
-            </div>
-            <!-- update note end -->
-       
 
 
         </section>
@@ -218,10 +224,3 @@
 </body>
 
 </html>
-
-
-
-
-
-
-   

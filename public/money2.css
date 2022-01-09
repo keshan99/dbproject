@@ -39476,7 +39476,7 @@ blockquote {
 }
 
 .u-header .u-logo-image-1 {
-    max-width: 64px;
+    /* max-width: 64px; */
     max-height: 64px;
 }
 

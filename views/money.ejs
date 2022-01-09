@@ -9,25 +9,26 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="/money3.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 
     <link rel="stylesheet" href="/money2.css" media="screen">
     <link rel="stylesheet" href="/money1.css" media="screen">
     <script class="u-script" type="text/javascript" src="/jquery.js" defer=""></script>
     <script class="u-script" type="text/javascript" src="/nicepage.js" defer=""></script>
-    
+
     <meta name="generator" content="Nicepage 3.20.4, nicepage.com">
     <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i">
 
 
-    <title>money m</title>
+    <title>money</title>
 </head>
 
 <body>
     <header class="u-clearfix u-header u-header" id="sec-0b9d">
         <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
-            <a href="https://nicepage.com" class="u-image u-logo u-image-1">
-                <img src="images/default-logo.png" class="u-logo-image u-logo-image-1">
+            <a href="/" class="u-image u-logo u-image-1">
+                <img src="logo21.png" alt="/dashboard" width="200px" class="u-logo-image u-logo-image-1">
+
             </a>
             <nav class="u-menu u-menu-dropdown u-offcanvas u-menu-1">
                 <div class="menu-collapse" style="font-size: 1rem; letter-spacing: 0px;">
@@ -40,7 +41,7 @@
                 </div>
                 <div class="u-nav-container">
                     <ul class="u-nav u-unstyled u-nav-1">
-                        <li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="/" style="padding: 10px 20px;">Home</a>
+                        <li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="/" style="padding: 10px 20px;">DashBoard</a>
                         </li>
                         <li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="/profile" style="padding: 10px 20px;">profile</a>
                         </li>
@@ -51,11 +52,11 @@
                         <div class="u-sidenav-overflow">
                             <div class="u-menu-close"></div>
                             <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2">
-                                <li class="u-nav-item"><a class="u-button-style u-nav-link" href="/">Home</a>
+                                <li class="u-nav-item"><a class="u-button-style u-nav-link" href="/">DashBoard</a>
                                 </li>
                                 <li class="u-nav-item"><a class="u-button-style u-nav-link" href="/profile">profile</a>
                                 </li>
-                                
+
                             </ul>
                         </div>
                     </div>
@@ -72,10 +73,10 @@
 
             <div class="total-cash">
                 <div class="item in">
-                    <p>last 30 day cash In :<span id="cash-in"><%=totalIn%></span> $</p>
+                    <p>last 30 day cash In : $ <span id="cash-in"><%=totalIn%></span></p>
                 </div>
                 <div class="item out">
-                    <p>last 30 day cash Out :<span id="cash-out"><%=totalOut%></span> $</p>
+                    <p>last 30 day cash Out : $ <span id="cash-out"><%=totalOut%></span></p>
                 </div>
             </div>
 
@@ -86,34 +87,42 @@
                             <div class="u-layout">
                                 <div class="u-layout-row">
                                     <div class="u-container-style u-layout-cell u-shape-rectangle u-size-30 u-layout-cell-1">
-                                        <div class="u-container-layout u-container-layout-1" id="ID_moneydetailIn"> 
-                                                <script>
-
-                                                    let clientmoneydetailIn = <%-JSON.stringify(moneydetailIn)%>;
-
-                                                </script>
+                                        <div class="u-container-layout u-container-layout-1" id="ID_moneydetailIn">
+                                            <script>
+                                                let clientmoneydetailIn = <%-JSON.stringify(moneydetailIn)%>;
+                                            </script>
 
 
                                             <% for(var i = 0; i < moneydetailIn.length; i++) { %>
 
-                                            <div class="money_post u-container-style u-expanded-width u-group u-palette-1-light-2 u-radius-7 u-shape-round u-group-3">
-                                                <div class="u-container-layout u-valign-top-sm u-valign-top-xs u-container-layout-4">
-                                                    <div class="u-container-style u-expanded-height u-group u-palette-4-base u-radius-10 u-shape-round u-group-4">
-                                                    <button class="postEdit" id=<%=i%>>✎</button>
-                                                        <div class="u-container-layout u-container-layout-5">
-                                                            <p class="u-small-text u-text u-text-default u-text-variant u-text-6"><%=moneydetailIn[i].date%></p>
-                                                            <p class="u-align-center u-text u-text-default u-text-7"><%=moneydetailIn[i].value%> $</p>
-                                                            <p class="u-align-left u-small-text u-text u-text-default u-text-variant u-text-8"><%=moneydetailIn[i].time%></p>
+                                                <div class="money_post u-container-style u-expanded-width u-group u-palette-1-light-2 u-radius-7 u-shape-round u-group-3">
+                                                    <div class="u-container-layout u-valign-top-sm u-valign-top-xs u-container-layout-4">
+                                                        <div class="u-container-style u-expanded-height u-group u-palette-4-base u-radius-10 u-shape-round u-group-4">
+                                                            <button class="postEdit" id=<%=i%>>✎</button>
+                                                            <div class="u-container-layout u-container-layout-5">
+                                                                <p class="u-small-text u-text u-text-default u-text-variant u-text-6">
+                                                                    <%=moneydetailIn[i].date%>
+                                                                </p>
+                                                                <p class="u-align-center u-text u-text-default u-text-7">
+                                                                    $
+                                                                    <%=moneydetailIn[i].value%>
+                                                                </p>
+                                                                <p class="u-align-left u-small-text u-text u-text-default u-text-variant u-text-8">
+                                                                    <%=moneydetailIn[i].time%>
+                                                                </p>
+                                                            </div>
                                                         </div>
+                                                        <img class="u-expanded-height u-image u-image-round u-radius-10 u-image-2" src="images/2.svg" alt="" data-image-width="400" data-image-height="265">
+                                                        <p class="money_title u-large-text u-text u-text-default u-text-palette-1-light-3 u-text-variant u-text-9" data-animation-name="fadeIn">
+                                                            <%=moneydetailIn[i].name%>
+                                                        </p>
+                                                        <p class="money_note u-text u-text-10">
+                                                            <%=moneydetailIn[i].note%><br>
+                                                        </p>
                                                     </div>
-                                                    <img class="u-expanded-height u-image u-image-round u-radius-10 u-image-2" src="images/2.svg" alt="" data-image-width="400" data-image-height="265">
-                                                    <p class="money_title u-large-text u-text u-text-default u-text-palette-1-light-3 u-text-variant u-text-9" data-animation-name="fadeIn"><%=moneydetailIn[i].name%></p>
-                                                    <p class="money_note u-text u-text-10"><%=moneydetailIn[i].note%><br>
-                                                    </p>
                                                 </div>
-                                            </div>
-                                            <% } %>
- <!--
+                                                <% } %>
+                                                    <!--
                                             <%if (typeof moneydetail !== 'undefined') { %> 
                                                 
                                             <div class="u-container-style u-expanded-width u-group u-palette-1-light-2 u-radius-7 u-shape-round u-group-3">
@@ -134,41 +143,49 @@
                                             
                                             <% } %>
 
--->                                         
+-->
 
-                                            
+
                                         </div>
                                     </div>
                                     <div class="u-container-style u-layout-cell u-size-30 u-layout-cell-2">
                                         <div class="u-container-layout u-container-layout-8" id="ID_moneydetailOut">
-                                            
+
                                             <script>
-
-                                                    let clientmoneydetailOut = <%-JSON.stringify(moneydetailOut)%>;
-
-                                                </script>
+                                                let clientmoneydetailOut = <%-JSON.stringify(moneydetailOut)%>;
+                                            </script>
                                             <!-- -->
 
-                                                   
+
 
                                             <% for(var i = 0; i < moneydetailOut.length; i++) { %>
-                                            <div class="money_post u-container-style u-expanded-width u-group u-palette-1-light-2 u-radius-7 u-shape-round u-group-9">
-                                                <div class="u-container-layout u-valign-top-lg u-valign-top-md u-valign-top-sm u-valign-top-xs u-container-layout-11">
-                                                    <div class="u-container-style u-expanded-height u-group u-palette-2-light-1 u-radius-10 u-shape-round u-group-10">
-                                                         <button class="postEdit" id=<%=i%>>✎</button>
-                                                        <div class="u-container-layout u-container-layout-12">
-                                                            <p class="u-small-text u-text u-text-default u-text-variant u-text-21"><%=moneydetailOut[i].date%></p>
-                                                            <p class="u-align-center u-text u-text-default u-text-22"><%=moneydetailOut[i].value%> $</p>
-                                                            <p class="u-align-left u-small-text u-text u-text-default u-text-variant u-text-23"><%=moneydetailOut[i].time%></p>
+                                                <div class="money_post u-container-style u-expanded-width u-group u-palette-1-light-2 u-radius-7 u-shape-round u-group-9">
+                                                    <div class="u-container-layout u-valign-top-lg u-valign-top-md u-valign-top-sm u-valign-top-xs u-container-layout-11">
+                                                        <div class="u-container-style u-expanded-height u-group u-palette-2-light-1 u-radius-10 u-shape-round u-group-10">
+                                                            <button class="postEdit" id=<%=i%>>✎</button>
+                                                            <div class="u-container-layout u-container-layout-12">
+                                                                <p class="u-small-text u-text u-text-default u-text-variant u-text-21">
+                                                                    <%=moneydetailOut[i].date%>
+                                                                </p>
+                                                                <p class="u-align-center u-text u-text-default u-text-22">
+                                                                    $
+                                                                    <%=moneydetailOut[i].value%>
+                                                                </p>
+                                                                <p class="u-align-left u-small-text u-text u-text-default u-text-variant u-text-23">
+                                                                    <%=moneydetailOut[i].time%>
+                                                                </p>
+                                                            </div>
                                                         </div>
+                                                        <img class="u-expanded-height u-image u-image-round u-radius-10 u-image-5" src="images/2.svg" alt="" data-image-width="400" data-image-height="265">
+                                                        <p class="money_title u-large-text u-text u-text-default u-text-variant u-text-white u-text-24">
+                                                            <%=moneydetailOut[i].name%>
+                                                        </p>
+                                                        <p class="money_note u-text u-text-25">
+                                                            <%=moneydetailOut[i].note%><br>
+                                                        </p>
                                                     </div>
-                                                    <img class="u-expanded-height u-image u-image-round u-radius-10 u-image-5" src="images/2.svg" alt="" data-image-width="400" data-image-height="265">
-                                                    <p class="money_title u-large-text u-text u-text-default u-text-variant u-text-white u-text-24"><%=moneydetailOut[i].name%></p>
-                                                    <p class="money_note u-text u-text-25"><%=moneydetailOut[i].note%><br>
-                                                    </p>
                                                 </div>
-                                            </div>
-                                            <% } %>
+                                                <% } %>
                                         </div>
                                     </div>
                                 </div>
@@ -209,7 +226,7 @@
 
                         <div class="btn-group-vertical btn-group-toggle" data-toggle="buttons">
 
-<% /*
+                            <% /*
                             <label class="btn btn-warning active cata_select" id="1">
                               <input type="radio" name="options" autocomplete="off"> fiverr_inn
                             </label>
@@ -221,23 +238,23 @@
                             <label class="btn btn-warning cata_select" id="3">
                               <input type="radio" name="options" autocomplete="off"> part time job
                             </label>
-*/ %>  
-<!--
+*/ %>
+                                <!--
 
                      <form method="post" id="In_edit_title_button" action="/test" class="postEdit" style="z-index: 100; font-size: 20px ; top: -15px;left: -10px; border-radius: 50%;" >
                             <input type="hidden" name="delete_data" id="delete_data" value="<%=moneyEnterIn%>">
                             <input style="z-index: 110; border-radius: 50%;" type="submit" value="⚙️">
                         </form>
 
--->  
-                 <button class="postEdit"  onclick="window.location.href='/changeTitleIn'" style="z-index: 100; font-size: 25px ; top: -10px;left: -10px;" ><i class="fas fa-cog"></i></button> 
-                        <% for(var i = 0; i < moneyEnterIn.length; i++) { %>  
-                            <% if(moneyEnterIn[i].priority !== 1) { %>      
-                                <label class="btn btn-warning cata_select" id="<%=moneyEnterIn[i].Topic_ID%>">
+-->
+                                <button class="postEdit" onclick="window.location.href='/changeTitleIn'" style="z-index: 100; font-size: 25px ; top: -10px;left: -10px;"><i class="fas fa-cog"></i></button>
+                                <% for(var i = 0; i < moneyEnterIn.length; i++) { %>
+                                    <% if(moneyEnterIn[i].priority !== 1) { %>
+                                        <label class="btn btn-warning cata_select" id="<%=moneyEnterIn[i].Topic_ID%>">
                                 <input type="radio" name="options" autocomplete="off"> <%=moneyEnterIn[i].name%>
                                 </label>
-                            <% }%>
-                        <% }%>
+                                        <% }%>
+                                            <% }%>
 
 
 
@@ -295,7 +312,7 @@
 
                                 </ul>
                             </div>
-<%/*
+                            <%/*
 
                             <label class="btn btn-warning active cata_select" id="Transport">
                               <input type="radio" name="options" id="option2" autocomplete="off"> Transport
@@ -317,20 +334,20 @@
                                 <input type="radio" name="options" id="option6" autocomplete="off"> online_shoping
                               </label>
 */%>
-            <!--                <% for(var i = 0; i < moneyEnterOut.length; i++) { %>          
+                                <!--                <% for(var i = 0; i < moneyEnterOut.length; i++) { %>          
                                 <label class="btn btn-warning cata_select" id="<%=moneyEnterOut[i].Topic_ID%>">
                                     <input type="radio" name="options" autocomplete="off"> <%=moneyEnterOut[i].name%>
                                 </label>
                             <% }%>
 -->
-                        <button class="postEdit"  onclick="window.location.href='/changeTitleOut'" style="z-index: 100; font-size: 25px ; top: -10px;left: -10px;" ><i class="fas fa-cog"></i></button> 
-                        <% for(var i = 0; i < moneyEnterOut.length; i++) { %>  
-                            <% if(moneyEnterOut[i].priority !== 1) { %>      
-                                <label class="btn btn-warning cata_select" id="<%=moneyEnterOut[i].Topic_ID%>">
+                                <button class="postEdit" onclick="window.location.href='/changeTitleOut'" style="z-index: 100; font-size: 25px ; top: -10px;left: -10px;"><i class="fas fa-cog"></i></button>
+                                <% for(var i = 0; i < moneyEnterOut.length; i++) { %>
+                                    <% if(moneyEnterOut[i].priority !== 1) { %>
+                                        <label class="btn btn-warning cata_select" id="<%=moneyEnterOut[i].Topic_ID%>">
                                 <input type="radio" name="options" autocomplete="off"> <%=moneyEnterOut[i].name%>
                                 </label>
-                            <% }%>
-                        <% }%>
+                                        <% }%>
+                                            <% }%>
 
 
 
@@ -370,11 +387,11 @@
                 <div class="editpost-pluse-con">
                     <div class="catagory" id="catagory3">
                         <div class="btn-group-vertical btn-group-toggle" data-toggle="buttons">
-                       <% for(var i = 0; i < moneyEnterIn.length; i++) { %>          
-                            <label class="btn btn-warning cata_select cat3" id="edit<%=moneyEnterIn[i].Topic_ID%>">
+                            <% for(var i = 0; i < moneyEnterIn.length; i++) { %>
+                                <label class="btn btn-warning cata_select cat3" id="edit<%=moneyEnterIn[i].Topic_ID%>">
                               <input type="radio" name="options" autocomplete="off"> <%=moneyEnterIn[i].name%>
                             </label>
-                        <% }%>
+                                <% }%>
 
 
                         </div>
@@ -392,7 +409,7 @@
                             <input type="hidden" name="moneyItemID" id="editpost-hiddenInputPluse" />
                             <input type="hidden" name="RecodeID" id="editpost-hidden_RID_Pluse" value="5" />
                             <input type="button" id="edit_form_in_delete" value="delete">
-                            
+
                             <input id="edit_form_in_submit" type="submit" value="Submit" name="submitbtn">
                         </form>
                     </div>
@@ -406,7 +423,7 @@
                     <div class="catagory" id="catagory4">
                         <div class="btn-group-vertical btn-group-toggle" data-toggle="buttons">
 
-                        <div class="btn-group">
+                            <div class="btn-group">
                                 <label class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                   <input type="radio" name="options" id="option2" autocomplete="off"> Food
                                 </label>
@@ -423,11 +440,11 @@
 
                                 </ul>
                             </div>
-                        <% for(var i = 0; i < moneyEnterOut.length; i++) { %>          
+                            <% for(var i = 0; i < moneyEnterOut.length; i++) { %>
                                 <label class="btn btn-warning cata_select cat4" id="edit<%=moneyEnterOut[i].Topic_ID%>">
                                     <input type="radio" name="options" autocomplete="off"> <%=moneyEnterOut[i].name%>
                                 </label>
-                        <% }%>
+                                <% }%>
 
                         </div>
                     </div>
@@ -444,7 +461,7 @@
                             <input type="hidden" name="moneyItemID" id="editpost-hiddenInputMines" />
                             <input type="hidden" name="RecodeID" id="editpost-hidden_RID_mines" value="5" />
                             <input type="button" id="edit_form_out_delete" value="delete">
-                            
+
                             <input id="edit_form_out_submit" type="submit" value="Submit" name="submitbtn">
                         </form>
                     </div>
