@@ -306,6 +306,15 @@
     margin: -10px 0 0 auto;
     padding: 0;
 }
+.dsdssd{
+    position: absolute;
+    color: hsl(49, 89%, 40%);
+    height: 100%;
+    width: 50%;
+    top: 0;
+    left: 0;
+    border-radius: 5px;
+}
 
 @media (max-width: 1199px) {
     .u-section-1 .u-sheet-1 {
