@@ -186,7 +186,7 @@ exports.login = async(req, res) => {
             "SELECT * FROM user WHERE email = ?", [email],
             async(error, results) => {
                 console.log(results);
-                if (results.length == 0 || results == null) {
+                if (results.length == 0) {
                     res.status(401).render("login", {
                         message: "Email is incorrect",
                     });
